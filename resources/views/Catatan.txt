@@ -1,0 +1,16 @@
+
+
+3. Guru dapat mengelola indikator pencapaian ( dikasih catatan permurid ) + catatan bisa di tambahkan.
+4. Guru dapat melampirkan output dokumen atas absensi + dan indikator pencapaian.
+
+
+
+
+
+SELESAI DONE
+1. Guru Dapat Melihat Data Siswa dan daftar siswa
+2. Guru dapat melakukan Absensi tp absensinya perminggu.
+5. Admin Dapat Mengelola Data Guru.
+6. Admin dapat melihat daftar guru
+7. Admin dapat melihat daftar murid.
+8. Super Admin dapat menghapus dan menambahkan admin + mengelola data admin.
