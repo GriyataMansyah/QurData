@@ -36,8 +36,7 @@ function previewImage(event) {
   reader.readAsDataURL(event.target.files[0]);
 }
 
-// <!-- ==============  ====== KELUAR DARI APLIKASI / LOG OUT ==================== -->
-// public/js/main.js (atau di dalam halaman Blade Anda)
+// <!-- ====================== KELUAR DARI APLIKASI / LOG OUT ==================== -->
 document.addEventListener('DOMContentLoaded', function() {
   // Menangani klik tombol delete
   document.getElementById('log_out').addEventListener('click', function() {
@@ -56,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   text: "Anda Telah Keluar",
                   icon: "success"
               });
-            //  ..........
+              window.location.href="/";
           }
       });
   });
@@ -130,3 +129,40 @@ function deleteRow(button) {
   row.remove();
 }
 
+// <!-- =========== HANYA BISA MENGISI DENGAN ANGKA ============================= -->
+function allowNumbersOnly(event) {
+  const input = event.target;
+  const value = input.value;
+
+  // Hapus semua karakter yang bukan angka
+  const sanitizedValue = value.replace(/[^0-9]/g, '');
+
+  // Update nilai input dengan nilai yang telah disanitasi
+  input.value = sanitizedValue;
+}
+
+// <!-- ====================== HAPUS DATA MURID ================================= -->
+const deleteIcons = document.querySelectorAll('.delete-icon');
+
+// Loop through each delete icon to add an event listener
+deleteIcons.forEach(icon => {
+    icon.addEventListener('click', function() {
+        const id = icon.getAttribute('data-id');
+
+        // Show SweetAlert for confirmation
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda tidak akan bisa mengembalikan data ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Find the form that corresponds to this delete icon and submit it
+                document.querySelector(`form[data-id="${id}"]`).submit();
+            }
+        });
+    });
+});

@@ -64,10 +64,5 @@
                 </a>
             </li>
 
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-danger">Keluar</button>
-            </form>
-            
         </ul>
     </div>

@@ -702,3 +702,17 @@ select{
 .input-form:focus {
   border-color: dodgerblue; /* Warna garis tepi saat input difokuskan */
 }
+
+.custom-form-group {
+  margin-bottom: 1.5rem;
+}
+.custom-label {
+  font-weight: bold;
+}
+.custom-input {
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+.custom-input:focus {
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+}

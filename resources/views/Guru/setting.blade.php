@@ -47,29 +47,29 @@
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="happy-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="text" class="form-control CustomInput_One" name="text" id="floatingInputGroup2" placeholder="Password" required>
+                                          <input type="text" class="form-control CustomInput_One" name="nama" id="floatingInputGroup2" required>
                                           <label for="floatingInputGroup2">Nama</label>
                                         </div>
                                       </div>
                                     </li>
                                     <br>
                                     <li>  
-                                        <label class="CustomText-One">Tanggal Lahir</label>
-                                        <div class="input-group has-validation inputa">
-                                        <span class="input-group-text"><ion-icon name="calendar-outline"></ion-icon></span>
-                                        <div class="form-floating">
-                                          <input type="date" class="form-control CustomInput_One" name="text" id="floatingInputGroup2" placeholder="Password" required>
-                                          <label for="floatingInputGroup2">Tanggal Lahir</label>
-                                        </div>
+                                      <label class="CustomText-One">Tangal Lahir</label>
+                                      <div class="input-group has-validation inputa">
+                                      <span class="input-group-text"><ion-icon name="person-circle-outline"></ion-icon></span>
+                                      <div class="form-floating">
+                                        <input type="Date" class="form-control CustomInput_One" name="tgl_lahir" id="floatingInputGroup2" required>
+                                        <label for="floatingInputGroup2">Tanggal Lahir</label>
                                       </div>
-                                    </li> 
+                                    </div>
+                                  </li> 
                                     <br>
                                     <li>  
                                         <label class="CustomText-One">Nama Pengguna</label>
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="person-circle-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="text" class="form-control CustomInput_One" name="text" id="floatingInputGroup2" placeholder="Password" required>
+                                          <input type="text" class="form-control CustomInput_One" name="username" id="floatingInputGroup2" required>
                                           <label for="floatingInputGroup2">Nama Pengguna</label>
                                         </div>
                                       </div>
@@ -80,7 +80,7 @@
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="password" class="form-control CustomInput_One" name="password" id="floatingInputGroup2" placeholder="Password" required>
+                                          <input type="password" class="form-control CustomInput_One" name="password" id="floatingInputGroup2" required>
                                           <label for="floatingInputGroup2">Password</label>
                                         </div>
                                       </div>
@@ -91,7 +91,7 @@
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="mail-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="email" class="form-control CustomInput_One" name="password" id="floatingInputGroup2" placeholder="Password" required>
+                                          <input type="email" class="form-control CustomInput_One" name="email" id="floatingInputGroup2" required>
                                           <label for="floatingInputGroup2">Email</label>
                                         </div>
                                       </div>

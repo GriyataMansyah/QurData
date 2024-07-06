@@ -24,7 +24,6 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Indikator Pencapaian</h2>   
-                        <button class="btn btn-primary">Tambah Murid</button>   
                     </div>
                     <div class="cardHeader">
                         <h5>Hasil capaian, dan catatan khusus untuk murid</h5>  

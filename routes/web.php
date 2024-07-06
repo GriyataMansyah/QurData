@@ -8,17 +8,15 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperadminController;
 
 // ====================== Menampilkan Login =============================
+Route::get('/', function () {return redirect()->route('login');});
+
 Route::get('login', [AkunController::class, 'index'])->name('login');
+
 
 // ======================== Proses Login ================================
 Route::POST('login', [AkunController::class, 'auth'])->name('auth');
 
-Route::POST('logout', [AkunController::class, 'logout'])->name('logout');
-
-
-
-
-
+Route::post('logout', [AkunController::class, 'logout'])->name('logout');
 
 
 
@@ -78,6 +76,11 @@ Route::get('guru/datamurid', [GuruController::class, 'datamurid'])->name('guru/d
 // ====================== Menampilkan Setting =============================
 Route::get('guru/setting', [GuruController::class, 'setting'])->name('guru/setting');
 
+// =========================== TAMBAH MURID ===============================
+Route::post('/addmurid', [GuruController::class, 'Addmurid'])->name('Addmurid');
+
+// =========================== HAPUS MURID ================================
+Route::delete('/removemurid',[GuruController::class, 'Removemurid'])->name('Removemurid');
 
 
 

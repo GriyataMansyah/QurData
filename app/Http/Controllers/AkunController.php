@@ -12,6 +12,9 @@ class AkunController extends Controller
 {
     public function index()
     {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
         return view('login');
     }
 
@@ -47,13 +50,4 @@ class AkunController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
-    {
-    Auth::logout();
-
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    return redirect('Login');
-    }
 }
