@@ -51,10 +51,10 @@ class GuruController extends Controller
 
     public function setting()
     {
-        $idAkun = Auth::id();
-        $Gurume = Guru::where('id_akun', $idAkun)->first();
-        dd($Gurume);
-        return view('Guru/setting', ['guru' => $Gurume]);
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        return view('Guru/setting',  compact('Gurume','Akun'));
     }
 
     public function Addmurid(Request $request)
@@ -77,7 +77,6 @@ class GuruController extends Controller
         $murid->no_hp = $request->no_hp;
         $murid->save();
 
-        // Redirect ke halaman yang sesuai dengan pesan sukses
         return redirect()->route('guru/datamurid')->with('success', 'Data murid berhasil ditambahkan!');
     }
 
@@ -85,11 +84,38 @@ class GuruController extends Controller
     {
         $muridId = $request->input('murid_id');
 
-        // Lakukan validasi atau proses penghapusan
         $murid = Murid::findOrFail($muridId);
         $murid->delete();
 
-        // Redirect atau response lain setelah penghapusan berhasil
         return redirect()->route('guru/datamurid')->with('success', 'Murid berhasil dihapus');
     }
+
+    public function gantiidentitas(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required',
+            'tgl_lahir' => 'required',
+            'username' => 'required',
+            'new_password' => 'nullable',
+            'confirm_password' => 'nullable',
+        ]);
+    
+        // Simpan data ke dalam database
+        $akun = Akun::find($request->input('id'));
+        $Guru = Guru::where('id_akun', $akun->id)->first();
+        $akun->username = $request->input('username');
+    
+        if ($request->filled('new_password')) {
+            $akun->password = bcrypt($request->input('new_password'));
+        }
+    
+        $Guru->nama = $request->input('nama');
+        $Guru->tanggal_lahir = $request->input('tgl_lahir');
+    
+        $akun->save();
+        $Guru->save();
+    
+        return redirect()->route('guru/setting')->with('success', 'Data akun berhasil disimpan!');
+    }
+    
 }

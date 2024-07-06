@@ -36,6 +36,9 @@ Route::get('superadmin/datamurid', [SuperadminController::class, 'datamurid'])->
 // ====================== Menampilkan Setting ============================
 Route::get('superadmin/setting', [SuperadminController::class, 'setting'])->name('superadmin/setting');
 
+// ===================== Mengganti Data Diri ==============================
+Route::post('/changesuperadmin',[SuperadminController::class, 'gantiidentitassuperadmin'])->name('gantiidentitassuperadmin');
+
 
 
 
@@ -52,6 +55,14 @@ Route::get('admin/datamurid', [AdminController::class, 'datamurid'])->name('admi
 
 // ====================== Menampilkan Setting  ============================
 Route::get('admin/setting', [AdminController::class, 'setting'])->name('admin/setting');
+
+// ======================= Menambahkan Guru ===============================
+Route::post('/addguru', [AdminController::class, 'Addguru'])->name('Addguru');
+
+// ===================== Mengganti Data Diri ==============================
+Route::post('/changeadmin',[AdminController::class, 'gantiidentitasadmin'])->name('gantiidentitasadmin');
+
+
 
 
 
@@ -76,11 +87,14 @@ Route::get('guru/datamurid', [GuruController::class, 'datamurid'])->name('guru/d
 // ====================== Menampilkan Setting =============================
 Route::get('guru/setting', [GuruController::class, 'setting'])->name('guru/setting');
 
-// =========================== TAMBAH MURID ===============================
+// ====================== Menambahkan Murid ===============================
 Route::post('/addmurid', [GuruController::class, 'Addmurid'])->name('Addmurid');
 
-// =========================== HAPUS MURID ================================
+// ======================= Menghapus Murid ================================
 Route::delete('/removemurid',[GuruController::class, 'Removemurid'])->name('Removemurid');
+
+// ===================== Mengganti Data Diri ==============================
+Route::post('/change',[GuruController::class, 'gantiidentitas'])->name('gantiidentitas');
 
 
 

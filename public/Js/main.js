@@ -166,3 +166,72 @@ deleteIcons.forEach(icon => {
         });
     });
 });
+
+
+// <!-- ======== MEMUNCULKAN INPUTAN PASSWORD PADA SETTINGS ======================= -->
+function showPasswordFields() {
+  // Sembunyikan label dan input password lama
+  document.getElementById('passwordSection').style.display = 'none';
+
+  // Dapatkan elemen container untuk menambahkan kolom baru
+  const container = document.getElementById('newPasswordFields');
+
+  // Buat kolom input untuk password baru
+  const newPasswordField = document.createElement('div');
+  newPasswordField.className = 'input-group has-validation inputa';
+  newPasswordField.style.position = 'relative';
+  newPasswordField.innerHTML = `
+      <label class="CustomText-One">Masukkan Password Baru</label>
+      <div class="input-group has-validation inputa">
+          <span class="input-group-text"><ion-icon name="lock-closed-outline"></ion-icon></span>
+          <div class="form-floating">
+              <input type="password" class="form-control CustomInput_One" name="new_password" id="newPassword" required>
+              <label for="newPassword">New Password</label>
+          </div>
+      </div>
+  `;
+
+  // Buat kolom input untuk konfirmasi password lama
+  const confirmPasswordField = document.createElement('div');
+  confirmPasswordField.className = 'input-group has-validation inputa';
+  confirmPasswordField.style.position = 'relative';
+  confirmPasswordField.innerHTML = `
+      <label class="CustomText-One">Konfirmasi Password Lama</label>
+      <div class="input-group has-validation inputa">
+          <span class="input-group-text"><ion-icon name="lock-open-outline"></ion-icon></span>
+          <div class="form-floating">
+              <input type="password" class="form-control CustomInput_One" name="confirm_password" id="confirmPassword" required>
+              <label for="confirmPassword">Confirm Password</label>
+          </div>
+      </div>
+  `;
+
+  // Tambahkan kolom baru ke dalam container
+  container.appendChild(newPasswordField);
+  container.appendChild(confirmPasswordField);
+}
+
+
+
+// <!-- ======== MEMAKSA GURU UNTUK MENGISI JENIS KELAMIN MURID ===================== -->
+function validateForm() {
+  var genderSelect = document.getElementById('gender');
+  var selectedValue = genderSelect.value;
+  
+  // Jika pengguna memilih opsi yang valid
+  if (selectedValue !== '' && selectedValue !== 'Pilih Gender Murid') {
+      return true; // Izinkan pengiriman formulir
+  } else {
+      // Tampilkan SweetAlert
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Silakan pilih jenis kelamin murid!',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+      });
+      return false; // Mencegah pengiriman formulir
+  }
+}
+

@@ -23,7 +23,7 @@
             <div class="cardBox">
                 <div class="card" id="notice-one">
                     <div>
-                        <div class="numbers">1</div>
+                        <div class="numbers">{{$Superadmin}}</div>
                         <div class="cardName">Super Admin</div>
                     </div>
 
@@ -34,7 +34,7 @@
 
                 <a class="card" href="{{route('superadmin/dataadmin')}}">
                     <div>
-                        <div class="numbers">80</div>
+                        <div class="numbers">{{$Admin}}</div>
                         <div class="cardName">Admin</div>
                     </div>
 
@@ -45,7 +45,7 @@
 
                 <a class="card" href="{{route('superadmin/dataguru')}}">
                     <div>
-                        <div class="numbers">284</div>
+                        <div class="numbers">{{$Guru}}</div>
                         <div class="cardName">Guru</div>
                     </div>
 
@@ -56,7 +56,7 @@
 
                 <a class="card" href="{{route('superadmin/datamurid')}}">
                     <div>
-                        <div class="numbers">842</div>
+                        <div class="numbers">{{$Murid}}</div>
                         <div class="cardName">Murid</div>
                     </div>
 
@@ -85,77 +85,49 @@
                         </thead>
 
                         <tbody>
+                            @foreach($Superadminall as $a)
                             <tr>
-                                <td>Ahmad Hambali</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
+                                <td>{{$a->nama}}</td>
+                                <td>{{$a->nik}}</td>
+                                <td>{{$a->no_hp}}</td>
+                                <td>{{$a->tanggal_lahir}}</td>
+                                <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
+                            @endforeach
 
+                            @foreach($Adminall as $a)
                             <tr>
-                                <td>Jufri Ramadhan</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
+                                <td>{{$a->nama}}</td>
+                                <td>{{$a->nik}}</td>
+                                <td>{{$a->no_hp}}</td>
+                                <td>{{$a->tanggal_lahir}}</td>
+                                <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
-                            
-                            <tr>
-                                <td>Cinta Maymunah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
+                            @endforeach
 
+                            @foreach($Guruall as $a)
                             <tr>
-                                <td>Ahmadi Irmansyah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
+                                <td>{{$a->nama}}</td>
+                                <td>{{$a->nik}}</td>
+                                <td>{{$a->no_hp}}</td>
+                                <td>{{$a->tanggal_lahir}}</td>
+                                <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
+                            @endforeach
 
+                            @foreach($Muridall as $a)
                             <tr>
-                                <td>Ahmad Hambali</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
+                                <td>{{$a->nama}}</td>
+                                <td>{{$a->nik}}</td>
+                                <td>{{$a->no_hp}}</td>
+                                <td>{{$a->tanggal_lahir}}</td>
+                                <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
-
-                            <tr>
-                                <td>Jufri Ramadhan</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            
-                            <tr>
-                                <td>Cinta Maymunah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Ahmadi Irmansyah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

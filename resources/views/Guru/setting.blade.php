@@ -14,6 +14,17 @@
 </head>
 
 <body>
+  @if(Session::has('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil Mengganti Data Akun!',
+            text: '{{ Session::get("success") }}',
+            showConfirmButton: true,  // Menampilkan tombol OK
+            timer: 2000  // Menampilkan alert selama 2 detik
+        });
+    </script>
+  @endif
         <!-- ========================= SideBar ==================== -->
         @include('Layout/Guru/sidebar')
         <!-- ========================= Main ==================== -->
@@ -41,13 +52,16 @@
                           </div>
 
                             <div class="col-lg-8 div-three">
+                              <form method="POST" action="{{route('gantiidentitas')}}">
+                                @csrf
                                 <ul class="untype">
                                     <li>  
+                                        <input type="hidden" name="id" value="{{ $Akun->id }}">
                                         <label class="CustomText-One">Nama Akunmu</label>
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="happy-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="text" class="form-control CustomInput_One" name="nama" id="floatingInputGroup2" required>
+                                          <input type="text" class="form-control CustomInput_One" name="nama" id="floatingInputGroup2" value="{{$Gurume->nama}}"required>
                                           <label for="floatingInputGroup2">Nama</label>
                                         </div>
                                       </div>
@@ -58,7 +72,7 @@
                                       <div class="input-group has-validation inputa">
                                       <span class="input-group-text"><ion-icon name="person-circle-outline"></ion-icon></span>
                                       <div class="form-floating">
-                                        <input type="Date" class="form-control CustomInput_One" name="tgl_lahir" id="floatingInputGroup2" required>
+                                        <input type="Date" class="form-control CustomInput_One" name="tgl_lahir" id="floatingInputGroup2" value = "{{$Gurume->tanggal_lahir}}" required>
                                         <label for="floatingInputGroup2">Tanggal Lahir</label>
                                       </div>
                                     </div>
@@ -69,43 +83,35 @@
                                         <div class="input-group has-validation inputa">
                                         <span class="input-group-text"><ion-icon name="person-circle-outline"></ion-icon></span>
                                         <div class="form-floating">
-                                          <input type="text" class="form-control CustomInput_One" name="username" id="floatingInputGroup2" required>
+                                          <input type="text" class="form-control CustomInput_One" name="username" id="floatingInputGroup2" value="{{$Akun->username}}" required>
                                           <label for="floatingInputGroup2">Nama Pengguna</label>
                                         </div>
                                       </div>
                                     </li>     
                                     <br>
-                                    <li>  
-                                        <label class="CustomText-One">Kata Sandi</label>
-                                        <div class="input-group has-validation inputa">
-                                        <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
-                                        <div class="form-floating">
-                                          <input type="password" class="form-control CustomInput_One" name="password" id="floatingInputGroup2" required>
-                                          <label for="floatingInputGroup2">Password</label>
+                                    <li>
+                                      <li id="passwordSection">
+                                        <label class="CustomText-One" id="passwordLabel">Kata Sandi</label>
+                                        <div class="input-group has-validation inputa" style="position: relative;">
+                                            <span class="input-group-text"><ion-icon name="key-outline"></ion-icon></span>
+                                            <div class="form-floating">
+                                                <input type="password" class="form-control CustomInput_One" name="password" id="floatingInputGroup2" value="{{$Akun->password}}" disabled>
+                                                <label for="floatingInputGroup2">Password</label>
+                                            </div>
+                                            <ion-icon name="create-outline" class="edit-icon" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;" onclick="showPasswordFields()"></ion-icon>
                                         </div>
-                                      </div>
                                     </li>
-                                    <br>
-                                    <li>  
-                                        <label class="CustomText-One">Alamat Email</label>
-                                        <div class="input-group has-validation inputa">
-                                        <span class="input-group-text"><ion-icon name="mail-outline"></ion-icon></span>
-                                        <div class="form-floating">
-                                          <input type="email" class="form-control CustomInput_One" name="email" id="floatingInputGroup2" required>
-                                          <label for="floatingInputGroup2">Email</label>
-                                        </div>
-                                      </div>
-                                    </li>
+                                    <div id="newPasswordFields"></div>                                    
                                     <br>
                                     <li><h5>PERUBAHAN AKUN<h2></li>
                                     <li>
                                         <p class="Grey">Segala perubahan di datamu akan tersimpan ke database secara permanen,tidak ada backup data<br> harap periksa setiap data dengan benar !!</p>
                                     </li>
                                     <li>
-                                        <button class="btn btn-primary">Simpan Data</button>
+                                        <button type="submit" value="submit" class="btn btn-primary">Simpan Data</button>
                                     </li>
                                 </ul>
-
+                              </form>
                                 
                               
                             </div>

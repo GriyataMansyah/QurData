@@ -29,86 +29,25 @@
                         <thead>
                             <tr>
                                 <td>Nama</td>
-                                <td>Role</td>
-                                <td>NIM</td>
+                                <td>NIK</td>
+                                <td>Nomor Handphone</td>
+                                <td>Tanggal Lahir</td>
                                 <td>Gender</td>
-                                <td>Tanggal Daftar</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
 
                         <tbody>
+                            @foreach($Muridall as $a)
                             <tr>
-                                <td>Ahmad Hambali</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
+                                <td>{{$a->nama}}</td>
+                                <td>{{$a->nik}}</td>
+                                <td>{{$a->no_hp}}</td>
+                                <td>{{$a->tanggal_lahir}}</td>
+                                <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
-
-                            <tr>
-                                <td>Jufri Ramadhan</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            
-                            <tr>
-                                <td>Cinta Maymunah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Ahmadi Irmansyah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Ahmad Hambali</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Jufri Ramadhan</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            
-                            <tr>
-                                <td>Cinta Maymunah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Ahmadi Irmansyah</td>
-                                <td>Guru</td>
-                                <td>4342301060</td>
-                                <td>Laki - Laki</td>
-                                <td>12 - 01 - 2024</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

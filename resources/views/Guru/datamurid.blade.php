@@ -13,6 +13,17 @@
 </head>
 
 <body>
+    @if(Session::has('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil Menambah Murid!',
+            text: '{{ Session::get("success") }}',
+            showConfirmButton: true, 
+            timer: 2000 
+        });
+    </script>
+    @endif
      <!-- ========================= SideBar ==================== -->
      @include('Layout/Guru/sidebar')
      <!-- ========================= Main ==================== -->
@@ -34,23 +45,23 @@
                           <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
                              </div>
                              <div class="modal-body">
-                              <form method="Post" action="{{route('Addmurid')}}">
+                              <form method="Post" action="{{route('Addmurid')}}" onsubmit="return validateForm()">
                                @csrf
                                 <div class="form-group custom-form-group">
                                     <label for="nik" class="custom-label">NIK :</label>
-                                    <input type="text" class="form-control custom-input" id="nik" placeholder="Masukkan NIK Murid" name="nik">
+                                    <input type="text" class="form-control custom-input" id="nik" placeholder="Masukkan NIK Murid" name="nik"  pattern="[0-9]{12}" title="NIK harus terdiri dari 12 angka" oninput="allowNumbersOnly(event)" required>
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="nama" class="custom-label">Nama :</label>
-                                    <input type="text" class="form-control custom-input" id="nama" placeholder="Masukkan Nama Murid" name="nama">
+                                    <input type="text" class="form-control custom-input" id="nama" placeholder="Masukkan Nama Murid" name="nama" required>
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="tanggal_Lahir" class="custom-label">Tanggal Lahir :</label>
-                                    <input type="date" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="tanggal_lahir">
+                                    <input type="date" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="tanggal_lahir" required>
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="gender" class="custom-label">Gender</label>
-                                    <select class="form-control custom-select" id="gender" name="jenis_kelamin">
+                                    <select class="form-control custom-select" id="gender" name="jenis_kelamin" required>
                                         <option selected disabled>Pilih Gender Murid</option>
                                         <option value="Laki - Laki">Laki - Laki</option>
                                         <option value="Perempuan">Perempuan</option>
@@ -58,7 +69,7 @@
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="no_hp" class="custom-label">No Handphone :</label>
-                                    <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Murid" name="no_hp">
+                                    <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Murid" name="no_hp" pattern="[0-9]{11}" title="Masukkan Nomor Hp Yang Valid" required>
                                 </div>
                             </div>
                              <div class="modal-footer">
