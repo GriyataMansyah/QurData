@@ -749,3 +749,16 @@ select{
 .delete-icon-two{
   margin-top: 30px;
 }
+
+.div-four{
+  height:50px;
+  border-radius:15px;
+  background-color:whitesmoke;
+}
+
+.div-four button{
+  width:100%;
+  padding:10px;
+  border-radius:15px;
+}
+

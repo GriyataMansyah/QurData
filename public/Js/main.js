@@ -273,3 +273,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
  
 
+document.getElementById('closeButton').addEventListener('click', function() {
+  Swal.fire({
+      icon: 'success',
+      title: 'Berhasil!',
+      text: 'Tombol Tutup telah ditekan',
+      showConfirmButton: true, 
+      timer: 2000 
+  });
+});

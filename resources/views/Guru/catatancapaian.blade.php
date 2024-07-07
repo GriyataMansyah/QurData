@@ -23,39 +23,64 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Indikator Pencapaian / Muhammad Mabrur</h2>   
+                        <h2>Indikator Pencapaian / {{$Murid->nama}}</h2>   
                     </div>
                     
-                            <button class="btn btn-primary" onclick="addRow()">Tambah Indikator</button>
-                    <table id="dataTable">
-                        <thead>
-                            <tr>
-                                <td>Nama Indikator Capaian</td>
-                                <td>Status Capaian</td>
-                                <td>Keterangan</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input placeholder="Nama Indikator" class="input-form"></input></td>
-                                <td>
-                                    <select onchange="updateSelectColor(this)">
-                                        <option>..</option>
-                                        <option class="status-hadir" value="Tercapai">Tercapai</option>
-                                        <option class="status-ga-hadir" value="Tidak">Tidak</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <textarea id="coolTextarea" class="form-control custom-textarea" rows="4"></textarea>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-danger" onclick="deleteRow(this)">Hapus</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    <form method="POST" action="{{ route('capaian.store') }}">
+                        @csrf
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <td>Nama Indikator Capaian</td>
+                                    <td>Status Capaian</td>
+                                    <td>Keterangan</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- //Lanjutkan Di Sini Untuk Menampilkan Dari Catatan Yang Telah Di Input, Liat Kontroler Ya Udah Ada Tu Programnya Tinggal Tampilkan Viewnya Aja Mas Bro --}}
+                                @foreach($Datacapaian as $index => $D)
+                                <tr>
+                                    <td>
+                                        <input 
+                                            type="hidden" 
+                                            name="data[{{$index}}][nama_indikator]" 
+                                            value="{{$D->nama}}">
+                                        <input 
+                                            placeholder="Nama Indikator" 
+                                            class="input-form" 
+                                            value="{{$D->nama}}" 
+                                            disabled>
+                                    </td>
+                                    <td>
+                                        <select 
+                                            name="data[{{$index}}][status]" 
+                                            onchange="updateSelectColor(this)">
+                                            <option value="">..</option>
+                                            <option class="status-hadir" value="Tercapai">Tercapai</option>
+                                            <option class="status-ga-hadir" value="Tidak">Tidak</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <textarea 
+                                            name="data[{{$index}}][keterangan]" 
+                                            id="coolTextarea" 
+                                            class="form-control custom-textarea" 
+                                            rows="4">
+                                        </textarea>
+                                    </td>
+                                    
+                                </tr>
+                                @endforeach
+                                <td><input type="hidden" value="{{$Murid->id}}" name="id_murid"></td>
+                                <td><input type="hidden" value="{{$Akun->id}}" name="id_guru"></td>
+                            </tbody>
+                        </table>
+                        <div class="div-four">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                    
+                    
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
 
@@ -64,8 +89,6 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="{{ asset('Js/main.js')}}"></script>
     <script>
-
-    <!-- ====== Menampilkan Alert Tidak Punya Akses ======= -->
 </body>
 
 </html>

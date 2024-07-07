@@ -44,9 +44,15 @@ class GuruController extends Controller
         return view('Guru/capaian', compact('Muridall','Gurume','capaians'));
     }
 
-    public function catatancapaian()
+    public function catatancapaian($id)
     {
-        return view('Guru/catatancapaian');
+        $Datacapaian = Datacapaian::all();
+        $Murid = Murid::find($id);
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Capaian = Capaian::where('id_murid', $id)->get();
+
+        return view('Guru.catatancapaian', compact('Datacapaian', 'Murid','Akun'));
     }
 
     public function datamurid()
@@ -143,7 +149,7 @@ class GuruController extends Controller
             ]);
         }
 
-        return redirect()->route('guru/capaian')->with('Succes', 'Capaian berhasil ditambahkan.'); 
+        return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil ditambahkan.'); 
     }
 
 
@@ -152,8 +158,22 @@ class GuruController extends Controller
     $capaian = Datacapaian::find($id);
     $capaian->delete();
 
-    return redirect()->route('guru/capaian')->with('Succes', 'Capaian berhasil dihapus.');
+    return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil dihapus.');
     }
 
+    public function Addcatatan(Request $request)
+    {
+        foreach ($request->data as $index => $data) {
+            Capaian::create([
+                'nama_indikator' => $data['nama_indikator'],
+                'status' => $data['status'],
+                'keterangan' => $data['keterangan'],
+                'id_murid' => $request->id_murid,  
+                'id_guru' => $request->id_guru,   
+            ]);
+        }
+
+        return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
+    }
     
 }

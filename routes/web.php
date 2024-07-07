@@ -88,7 +88,7 @@ Route::get('guru/absensi', [GuruController::class, 'absensi'])->name('guru/absen
 Route::get('guru/capaian', [GuruController::class, 'capaian'])->name('guru/capaian');
 
 // ================== Menampilkan Data Catatan Capaian ====================
-Route::get('guru/catatancapaian', [GuruController::class, 'catatancapaian'])->name('guru/catatancapaian');
+Route::get('guru/catatancapaian/{id}', [GuruController::class, 'catatancapaian'])->name('guru/catatancapaian');
 
 // ====================== Menampilkan Data Murid ==========================
 Route::get('guru/datamurid', [GuruController::class, 'datamurid'])->name('guru/datamurid');
@@ -110,6 +110,9 @@ Route::post('/addcapaian',[GuruController::class, 'Addcapaian'])->name('Addcapai
 
 // ================== Hapus DataMaster Capaian ============================
 Route::delete('/hapus-capaian/{id}', [GuruController::class, 'Removecapaian'])->name('capaian.hapus');
+
+// =============== Guru Membuat Catatan Untuk Murid =======================
+Route::post('/submit-capaian', [GuruController::class, 'Addcatatan'])->name('capaian.store');
 
 
 
