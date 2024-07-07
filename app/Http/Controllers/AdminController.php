@@ -73,7 +73,7 @@ class AdminController extends Controller
         $guru->id_akun = $akun->id;
         $guru->save();
 
-        return redirect()->route('admin/dataguru')->with('success', 'Data murid berhasil ditambahkan!');
+        return redirect()->route('admin/dataguru')->with('berhasil', 'Data murid berhasil ditambahkan!');
     }
 
     public function gantiidentitasadmin(Request $request)
@@ -102,5 +102,15 @@ class AdminController extends Controller
         $Admin->save();
     
         return redirect()->route('admin/setting')->with('success', 'Data akun berhasil disimpan!');
+    }
+
+    public function Removeguru(Request $request)
+    {
+        $guruId = $request->input('guru_id');
+
+        $guruId = Guru::findOrFail($guruId);
+        $guruId->delete();
+
+        return redirect()->route('admin/dataguru');
     }
 }

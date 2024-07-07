@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    @if(Session::has('success'))
+    @if(Session::has('berhasil'))
     <script>
         Swal.fire({
             icon: 'success',
@@ -108,6 +108,15 @@
                                 <td>{{$a->tanggal_lahir}}</td>
                                 <td>{{$a->jenis_kelamin}}</td>
                                 <td><span class="status delivered">AKTIF</span></td>
+                                <td>
+                                    <form method="POST" action="{{ route('Removeguru') }}" data-id="{{ $a->id }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="guru_id" value="{{ $a->id }}">
+                                        <div type="button" class="delete-icon" data-id="{{ $a->id }}"><ion-icon name="trash-outline"></ion-icon></div>
+                                        <button type="submit" class="btn-hapus" style="display: none;">Hapus</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

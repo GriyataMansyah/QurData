@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    @if(Session::has('success'))
+    @if(Session::has('berhasil'))
     <script>
         Swal.fire({
             icon: 'success',

@@ -6,7 +6,9 @@ use App\Models\Akun;
 use App\Models\Guru;
 use App\Models\Admin;
 use App\Models\Murid;
+use App\Models\Capaian;
 use App\Models\Superadmin;
+use App\Models\Datacapaian;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -34,8 +36,12 @@ class GuruController extends Controller
 
     public function capaian()
     {
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
         $Muridall = Murid::all();
-        return view('Guru/capaian', compact('Muridall'));
+        $capaians = Datacapaian::all();
+        return view('Guru/capaian', compact('Muridall','Gurume','capaians'));
     }
 
     public function catatancapaian()
@@ -77,7 +83,7 @@ class GuruController extends Controller
         $murid->no_hp = $request->no_hp;
         $murid->save();
 
-        return redirect()->route('guru/datamurid')->with('success', 'Data murid berhasil ditambahkan!');
+        return redirect()->route('guru/datamurid')->with('berhasil', 'Data murid berhasil ditambahkan!');
     }
 
     public function Removemurid(Request $request)
@@ -117,5 +123,37 @@ class GuruController extends Controller
     
         return redirect()->route('guru/setting')->with('success', 'Data akun berhasil disimpan!');
     }
+    
+
+    public function AddCapaian(Request $request)
+    {
+
+    $request->validate([
+        'id' => 'required|exists:Guru,id',
+        'capaian' => 'required|array',
+        'capaian.*' => 'required|string|max:255'
+    ]);
+
+        $gurumeId = $request->id;
+
+        foreach ($request->capaian as $capaian) {
+            Datacapaian::create([
+                'nama' => $capaian,
+                'guru_id' => $gurumeId
+            ]);
+        }
+
+        return redirect()->route('guru/capaian')->with('Succes', 'Capaian berhasil ditambahkan.'); 
+    }
+
+
+    public function Removecapaian($id)
+    {
+    $capaian = Datacapaian::find($id);
+    $capaian->delete();
+
+    return redirect()->route('guru/capaian')->with('Succes', 'Capaian berhasil dihapus.');
+    }
+
     
 }

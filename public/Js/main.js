@@ -144,12 +144,10 @@ function allowNumbersOnly(event) {
 // <!-- ====================== HAPUS DATA MURID ================================= -->
 const deleteIcons = document.querySelectorAll('.delete-icon');
 
-// Loop through each delete icon to add an event listener
 deleteIcons.forEach(icon => {
     icon.addEventListener('click', function() {
         const id = icon.getAttribute('data-id');
 
-        // Show SweetAlert for confirmation
         Swal.fire({
             title: 'Apakah Anda yakin?',
             text: "Anda tidak akan bisa mengembalikan data ini!",
@@ -160,13 +158,19 @@ deleteIcons.forEach(icon => {
             confirmButtonText: 'Ya, hapus saja!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Find the form that corresponds to this delete icon and submit it
                 document.querySelector(`form[data-id="${id}"]`).submit();
+
+                // Show success message
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Berhasil menghapus data.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
             }
         });
     });
 });
-
 
 // <!-- ======== MEMUNCULKAN INPUTAN PASSWORD PADA SETTINGS ======================= -->
 function showPasswordFields() {
@@ -234,4 +238,38 @@ function validateForm() {
       return false; // Mencegah pengiriman formulir
   }
 }
+
+// <!-- ======================== TAMBAH INPUTAN CAPAIAN =========================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  const addDataButton = document.getElementById('addDataButton');
+  const inputContainer = document.getElementById('inputContainer');
+  let inputCount = 0;
+
+  // Function to add event listener for delete button
+  function addDeleteEvent(deleteButton) {
+      deleteButton.addEventListener('click', function() {
+          inputContainer.removeChild(deleteButton.parentElement);
+      });
+  }
+
+  addDataButton.addEventListener('click', function() {
+      inputCount++;
+      const newInputGroup = document.createElement('div');
+      newInputGroup.classList.add('form-group', 'custom-form-group', 'd-flex', 'align-items-center', 'margin-one');
+
+      newInputGroup.innerHTML = `
+          <label for="capaian${inputCount}" class="custom-label"></label>
+          <input type="text" class="form-control custom-input" id="capaian${inputCount}" placeholder="Masukkan Nama Capaian" name="capaian[]" required>
+          <button type="button" class="btn btn-danger delete-icon" data-id="${inputCount}"><ion-icon name="trash-outline"></ion-icon></button>
+      `;
+
+      inputContainer.appendChild(newInputGroup);
+
+      // Add event listener to the new delete button
+      const newDeleteIcon = newInputGroup.querySelector('.delete-icon');
+      addDeleteEvent(newDeleteIcon);
+  });
+});
+
+ 
 

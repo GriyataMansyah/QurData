@@ -14,6 +14,15 @@
 </head>
 
 <body>
+    @if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ session('success') }}',
+        });
+    </script>
+    @endif
      <!-- ========================= SideBar ==================== -->
      @include('Layout/Guru/sidebar')
      <!-- ========================= Main ==================== -->
@@ -24,6 +33,64 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Indikator Pencapaian</h2>   
+                        <div>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><ion-icon name="add-circle-outline"></ion-icon></button>  
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne"><ion-icon name="trash-outline"></ion-icon></button>  
+                        </div>
+                    </div>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                                <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Tambah Capaian</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                     <form method="Post" action="{{route('Addcapaian')}}">
+                                      @csrf
+                                      <button type="button" class="btn btn-primary button-two" id="addDataButton">Tambah Data</button>
+                                      <input type="hidden" name="id" value="{{$Gurume->id}}">
+                                      <div id="inputContainer">
+                                        @foreach($capaians as $capaian)
+                                        <div class="d-flex align-items-center">
+                                            <input type="text" class="form-control custom-input-two" value="{{ $capaian->nama }}" disabled>
+                                        </div>
+                                        @endforeach
+                                      </div>
+                                   </div>
+                                    <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                   <button type="submit" value="submit" class="btn btn-primary">Simpan</button>
+                                </div>
+                               </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="exampleModalOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                                <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Hapus Capaian</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        @foreach($capaians as $capaian)
+                                        <div class="d-flex align-items-center mb-2">
+                                            <input type="text" class="form-control custom-input-two" value="{{ $capaian->nama }}" disabled>
+                                            <form action="{{ route('capaian.hapus', ['id' => $capaian->id]) }}" method="POST" class="delete-form ml-2">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger delete-icon-two" data-id="{{ $capaian->id }}">
+                                                    <ion-icon name="trash-outline"></ion-icon>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                </div>
+                               </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="cardHeader">
                         <h5>Hasil capaian, dan catatan khusus untuk murid</h5>  
@@ -48,15 +115,22 @@
                         </tbody>
 
 
-    <!-- =========== Scripts =========  -->
-    <script src="assets/js/main.js"></script>
 
-    <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="{{ asset('Js/main.js')}}"></script>
 
-    <!-- ====== Menampilkan Alert Tidak Punya Akses ======= -->
-</body>
+       <!-- =========== Scripts =========  -->
+       
+
+       <!-- ====== ionicons ======= -->
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+       <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+       <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+       <script src="{{ asset('Js/main.js')}}"></script>
+   
+        <!-- jQuery, Popper.js, and Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
 
 </html>

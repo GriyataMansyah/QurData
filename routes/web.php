@@ -39,6 +39,12 @@ Route::get('superadmin/setting', [SuperadminController::class, 'setting'])->name
 // ===================== Mengganti Data Diri ==============================
 Route::post('/changesuperadmin',[SuperadminController::class, 'gantiidentitassuperadmin'])->name('gantiidentitassuperadmin');
 
+// ======================= Menambahkan Admin ==============================
+Route::post('/addadmin', [SuperadminController::class, 'Addadmin'])->name('Addadmin');
+
+// ======================= Menghapus Admin ================================
+Route::delete('/removeadmin',[SuperadminController::class, 'Removeadmin'])->name('Removeadmin');
+
 
 
 
@@ -61,6 +67,9 @@ Route::post('/addguru', [AdminController::class, 'Addguru'])->name('Addguru');
 
 // ===================== Mengganti Data Diri ==============================
 Route::post('/changeadmin',[AdminController::class, 'gantiidentitasadmin'])->name('gantiidentitasadmin');
+
+// ======================= Menghapus Guru ================================
+Route::delete('/removeguru',[AdminController::class, 'Removeguru'])->name('Removeguru');
 
 
 
@@ -95,6 +104,13 @@ Route::delete('/removemurid',[GuruController::class, 'Removemurid'])->name('Remo
 
 // ===================== Mengganti Data Diri ==============================
 Route::post('/change',[GuruController::class, 'gantiidentitas'])->name('gantiidentitas');
+
+// ================== Tambah DataMaster Capaian ===========================
+Route::post('/addcapaian',[GuruController::class, 'Addcapaian'])->name('Addcapaian');
+
+// ================== Hapus DataMaster Capaian ============================
+Route::delete('/hapus-capaian/{id}', [GuruController::class, 'Removecapaian'])->name('capaian.hapus');
+
 
 
 

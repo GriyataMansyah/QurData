@@ -78,4 +78,46 @@ class SuperadminController extends Controller
     
         return redirect()->route('superadmin/setting')->with('success', 'Data akun berhasil disimpan!');
     }
+
+    public function Addadmin(Request $request)
+    {
+        
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'nik' => 'required|numeric|min:11',
+            'nama' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
+            'no_hp' => 'required|numeric',
+        ]);
+
+        $akun = new Akun();
+        $akun->username = $request->username;
+        $akun->password = bcrypt($request->password);
+        $akun->role = 'admin'; 
+        $akun->save(); 
+
+        $guru = new Admin();
+        $guru->nik = $request->nik;
+        $guru->nama = $request->nama;
+        $guru->tanggal_lahir = $request->tanggal_lahir;
+        $guru->jenis_kelamin = $request->jenis_kelamin;
+        $guru->no_hp = $request->no_hp;
+        $guru->id_akun = $akun->id;
+        $guru->save();
+
+        return redirect()->route('superadmin/dataadmin')->with('berhasil', 'Data murid berhasil ditambahkan!');
+    }
+
+    public function Removeadmin(Request $request)
+    {
+        $adminId = $request->input('admin_id');
+
+        $adminId = Admin::findOrFail($adminId);
+        $adminId->delete();
+
+        return redirect()->route('superadmin/dataadmin');
+    }
 }
+

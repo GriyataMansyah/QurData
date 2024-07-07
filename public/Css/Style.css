@@ -729,5 +729,23 @@ select{
 }
 
 .edit-icon:hover {
-  color: #007bff; /* Warna saat dihover */
+  color: #007bff;
+}
+
+.button-two{
+  width:100%;
+  padding-top:13px;
+  padding-bottom:13px;
+}
+
+.margin-one{
+  margin-top:30px;
+}
+
+.custom-input-two{
+  margin-top:30px;
+}
+
+.delete-icon-two{
+  margin-top: 30px;
 }
