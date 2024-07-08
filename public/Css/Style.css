@@ -750,15 +750,31 @@ select{
   margin-top: 30px;
 }
 
-.div-four{
+.div-five{
   height:50px;
   border-radius:15px;
   background-color:whitesmoke;
 }
 
-.div-four button{
+.button-five{
   width:100%;
   padding:10px;
   border-radius:15px;
+  background-color:rgb(8, 8, 118);
 }
 
+.button-six{
+  width:90%;
+  margin-left:5%;
+  padding:10px;
+}
+
+.BigIcon-one{
+  font-size:20px;
+  padding-top:3px;
+}
+
+.BigIcon-two{
+  font-size:20px;
+  padding-top:4px;
+}

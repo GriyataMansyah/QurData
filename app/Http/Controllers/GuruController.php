@@ -10,6 +10,7 @@ use App\Models\Capaian;
 use App\Models\Superadmin;
 use App\Models\Datacapaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,8 +52,11 @@ class GuruController extends Controller
         $IdAkun = Auth::id();
         $Akun = Akun::where('id',$IdAkun)->first();
         $Capaian = Capaian::where('id_murid', $id)->get();
+        $hasCapaian = DB::table('Capaian')
+        ->where('id_murid', $id)
+        ->get();
 
-        return view('Guru.catatancapaian', compact('Datacapaian', 'Murid','Akun'));
+        return view('Guru.catatancapaian', compact('Datacapaian', 'Murid','Akun','hasCapaian'));
     }
 
     public function datamurid()
@@ -162,18 +166,36 @@ class GuruController extends Controller
     }
 
     public function Addcatatan(Request $request)
-    {
-        foreach ($request->data as $index => $data) {
-            Capaian::create([
-                'nama_indikator' => $data['nama_indikator'],
-                'status' => $data['status'],
-                'keterangan' => $data['keterangan'],
-                'id_murid' => $request->id_murid,  
-                'id_guru' => $request->id_guru,   
-            ]);
-        }
+{
+    // Validasi data
+    $validatedData = $request->validate([
+        'data.*.nama_indikator' => 'required|string|max:255',
+        'data.*.status' => 'required|string|max:255',
+        'data.*.keterangan' => 'nullable|string',
+        'id_murid' => 'required|exists:Murid,id',
+        'id_guru' => 'required|exists:Guru,id',
+    ]);
 
-        return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
+    // Simpan data
+    foreach ($validatedData['data'] as $data) {
+        Capaian::create([
+            'nama_indikator' => $data['nama_indikator'],
+            'status' => $data['status'],
+            'keterangan' => $data['keterangan'],
+            'id_murid' => $validatedData['id_murid'],  
+            'id_guru' => $validatedData['id_guru'],   
+        ]);
     }
-    
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
+}
+
+    public function hapusSemuaCapaian()
+{
+    // Hapus semua data Capaian
+    Datacapaian::truncate();
+
+    return redirect()->back()->with('berhasil', 'Semua data Capaian telah dihapus.');
+}
 }

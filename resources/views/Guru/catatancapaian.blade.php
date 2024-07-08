@@ -24,10 +24,18 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Indikator Pencapaian / {{$Murid->nama}}</h2>   
-                    </div>
-                    
-                    <form method="POST" action="{{ route('capaian.store') }}">
-                        @csrf
+                        <div>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <ion-icon name="download-outline" class="BigIcon-one"></ion-icon>
+                                <span style="vertical-align: top;">Download Dokumen</span>
+                            </button>
+                        
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne">
+                                <ion-icon name="trash-outline" class="BigIcon-two"></ion-icon>
+                                <span style="vertical-align: top;">Hapus Data Dokumen</span>
+                            </button>
+                        </div>
+                    </div> 
                         <table id="dataTable">
                             <thead>
                                 <tr>
@@ -36,48 +44,62 @@
                                     <td>Keterangan</td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {{-- //Lanjutkan Di Sini Untuk Menampilkan Dari Catatan Yang Telah Di Input, Liat Kontroler Ya Udah Ada Tu Programnya Tinggal Tampilkan Viewnya Aja Mas Bro --}}
+                            <tbody>        
+                                @if($hasCapaian->isEmpty())
                                 @foreach($Datacapaian as $index => $D)
-                                <tr>
-                                    <td>
-                                        <input 
-                                            type="hidden" 
-                                            name="data[{{$index}}][nama_indikator]" 
-                                            value="{{$D->nama}}">
-                                        <input 
-                                            placeholder="Nama Indikator" 
-                                            class="input-form" 
-                                            value="{{$D->nama}}" 
-                                            disabled>
-                                    </td>
-                                    <td>
-                                        <select 
-                                            name="data[{{$index}}][status]" 
-                                            onchange="updateSelectColor(this)">
-                                            <option value="">..</option>
-                                            <option class="status-hadir" value="Tercapai">Tercapai</option>
-                                            <option class="status-ga-hadir" value="Tidak">Tidak</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <textarea 
-                                            name="data[{{$index}}][keterangan]" 
-                                            id="coolTextarea" 
-                                            class="form-control custom-textarea" 
-                                            rows="4">
-                                        </textarea>
-                                    </td>
-                                    
-                                </tr>
+                                <form method="POST" action="{{ route('capaian.store') }}">
+                                    @csrf
+                                    <tr>
+                                        <td>
+                                            <input 
+                                                type="hidden" 
+                                                name="data[{{ $index }}][nama_indikator]" 
+                                                value="{{ $D->nama }}">
+                                            <input 
+                                                placeholder="Nama Indikator" 
+                                                class="input-form" 
+                                                value="{{ $D->nama }}" 
+                                                disabled>
+                                        </td>
+                                        <td>
+                                            <select 
+                                                name="data[{{ $index }}][status]" 
+                                                onchange="updateSelectColor(this)">
+                                                <option value="">..</option>
+                                                <option class="status-hadir" value="Tercapai">Tercapai</option>
+                                                <option class="status-ga-hadir" value="Tidak">Tidak</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <textarea 
+                                                name="data[{{ $index }}][keterangan]" 
+                                                id="coolTextarea" 
+                                                class="form-control custom-textarea" 
+                                                rows="4"></textarea>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 <td><input type="hidden" value="{{$Murid->id}}" name="id_murid"></td>
                                 <td><input type="hidden" value="{{$Akun->id}}" name="id_guru"></td>
+                                <td colspan="3">
+                                    
+                                        <button type="submit" class="btn btn-primary button-five">Simpan</button>
+                                       
+                                </td>
+                                
+                                @else
+                                <tr>
+                                    @foreach($hasCapaian as $item)
+                                    <tr>
+                                        <td><input class="input-from form-control" value="{{ $item->nama_indikator }}" disabled></td>
+                                        <td><input class="input-form" value="{{ $item->status }}" disabled></td>
+                                        <td><textarea class="form-control custom-textarea" rows="4" disabled>{{ $item->keterangan }}</textarea></td>
+                                    </tr>
+                                    @endforeach
+                                </tr>
+                                @endif
                             </tbody>
-                        </table>
-                        <div class="div-four">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
+                        </table>  
                     </form>
                     
                     

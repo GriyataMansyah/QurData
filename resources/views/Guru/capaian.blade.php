@@ -35,9 +35,17 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Indikator Pencapaian</h2>   
+                      
                         <div>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><ion-icon name="add-circle-outline"></ion-icon></button>  
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne"><ion-icon name="trash-outline"></ion-icon></button>  
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                <ion-icon name="add-circle-outline" class="BigIcon-one"></ion-icon>
+                                <span style="vertical-align: top;">Tambah Data Capaian</span>
+                            </button>
+                        
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne">
+                                <ion-icon name="trash-outline" class="BigIcon-one"></ion-icon>
+                                <span style="vertical-align: top;">Hapus Data Capaian</span>
+                            </button>
                         </div>
                     </div>
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,6 +95,10 @@
                                         </div>
                                         @endforeach
                                     </div>
+                                    <form id="hapusSemuaForm" action="{{ route('hapus.semua.capaian') }}" method="POST">
+                                        @csrf
+                                        <button type="button" class="btn btn-danger button-six" onclick="confirmDelete()">HAPUS SEMUA DATA</button>
+                                    </form>
                                     <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                                 </div>

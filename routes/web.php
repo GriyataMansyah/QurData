@@ -114,7 +114,8 @@ Route::delete('/hapus-capaian/{id}', [GuruController::class, 'Removecapaian'])->
 // =============== Guru Membuat Catatan Untuk Murid =======================
 Route::post('/submit-capaian', [GuruController::class, 'Addcatatan'])->name('capaian.store');
 
-
+// ========== Menghapus Semua Data Pada Data Capaian ======================
+Route::post('/hapus-semua-capaian', [GuruController::class, 'hapusSemuaCapaian'])->name('hapus.semua.capaian');
 
 
 

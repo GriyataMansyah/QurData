@@ -271,8 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
- 
-
+// <!-- ========================== MENAMPILKAN SESUAI ID ========================= -->
 document.getElementById('closeButton').addEventListener('click', function() {
   Swal.fire({
       icon: 'success',
@@ -282,3 +281,22 @@ document.getElementById('closeButton').addEventListener('click', function() {
       timer: 2000 
   });
 });
+
+
+// <!-- ======================== KONFIRMASI PENGHAPUSAN ========================== -->
+function confirmDelete() {
+  Swal.fire({
+      title: 'Anda yakin?',
+      text: "Anda akan menghapus semua data Capaian. Proses ini tidak dapat dibatalkan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus semua!',
+      cancelButtonText: 'Batal'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          document.getElementById('hapusSemuaForm').submit();
+      }
+  });
+}
