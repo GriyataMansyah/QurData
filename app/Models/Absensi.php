@@ -14,7 +14,11 @@ class Absensi extends Model
     protected $fillable = [
         "tahun",
         "bulan",
-        "minggu",
-        "status",
+        "minggu1",
+        "minggu2",
+        "minggu3",
+        "minggu4",
+        "id_murid",
+        "id_guru",
     ];
 }

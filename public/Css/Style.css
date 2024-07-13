@@ -778,3 +778,19 @@ select{
   font-size:20px;
   padding-top:4px;
 }
+
+@media print {
+  .Body-One {
+      margin: 0;
+      font-size: 7pt;
+      padding: 0;
+  }
+  /* Atur margin untuk cetakan */
+  @page {
+      margin-top: -23mm;
+      margin-left: -10mm;
+      margin-bottom: -10mm;
+      size: A4; /* Atur ukuran kertas menjadi A4 */
+  height: 11in; /* Atur tinggi kertas menjadi 11 inci */
+  }
+}

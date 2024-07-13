@@ -29,30 +29,41 @@
                     <table>
                         <thead>
                             <tr>
-                                <td colspan="4">
-                                    Bulan 
-                                    <select>
-                                        <option>...</option>
-                                        <option value="">Januari</option>
-                                        <option value="">Februari</option>
-                                        <option value="">Maret</option>
-                                        <option value="">April</option>
-                                        <option value="">Mei</option>
-                                        <option value="">Juni</option>
-                                        <option value="">July</option>
-                                        <option value="">Agustus</option>
-                                        <option value="">September</option>
-                                        <option value="">Oktober</option>
-                                        <option value="">November</option>
-                                        <option value="">Desember</option>
-                                    </select>
-                                    Tahun
-                                    <select>
-                                        <option>...</option>
-                                        <option value="">2023</option>
-                                        <option value="">2024</option>
-                                        <option value="">2025</option>
-                                    </select>    
+                                <form action="{{ route('guru/absensi') }}" method="GET">
+                                    <td colspan="4">
+                                        Bulan 
+                                        <select name="bulan">
+                                            <option selected disabled>...</option>
+                                            <option value="Januari" {{ request('bulan') == 'Januari' ? 'selected' : '' }}>Januari</option>
+                                            <option value="Februari" {{ request('bulan') == 'Februari' ? 'selected' : '' }}>Februari</option>
+                                            <option value="Maret" {{ request('bulan') == 'Maret' ? 'selected' : '' }}>Maret</option>
+                                            <option value="April" {{ request('bulan') == 'April' ? 'selected' : '' }}>April</option>
+                                            <option value="Mei" {{ request('bulan') == 'Mei' ? 'selected' : '' }}>Mei</option>
+                                            <option value="Juni" {{ request('bulan') == 'Juni' ? 'selected' : '' }}>Juni</option>
+                                            <option value="Juli" {{ request('bulan') == 'Juli' ? 'selected' : '' }}>Juli</option>
+                                            <option value="Agustus" {{ request('bulan') == 'Agustus' ? 'selected' : '' }}>Agustus</option>
+                                            <option value="September" {{ request('bulan') == 'September' ? 'selected' : '' }}>September</option>
+                                            <option value="Oktober" {{ request('bulan') == 'Oktober' ? 'selected' : '' }}>Oktober</option>
+                                            <option value="November" {{ request('bulan') == 'November' ? 'selected' : '' }}>November</option>
+                                            <option value="Desember" {{ request('bulan') == 'Desember' ? 'selected' : '' }}>Desember</option>
+                                        </select>
+                                        Tahun
+                                        <select name="tahun">
+                                            <option selected disabled>...</option>
+                                            @php
+                                                $startYear = 2024;
+                                                $currentYear = date('Y');
+                                            @endphp
+                                            @for ($year = $startYear; $year <= $currentYear + 1; $year++)
+                                                <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>
+                                                    {{ $year }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                        <button type="submit">Filter</button>
+                                    </td>
+                                </form>
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -66,48 +77,103 @@
                         </thead>
 
                         <tbody>
+                            <form method="post" action="{{route('simpanAbsensi')}}">    
+                            @csrf
+                            <input type="" value="{{$tahun}}" name="tahun"></input>     
+                            <input type="" value="{{$bulan}}" name="bulan"></input>               
                             <tr>
-                                @foreach ($Muridall as $A)
+                                @foreach ($muridAll as $A)
                                 <td>{{ $A->nama }}</td>
+                                <input type="" value="{{$A->id}}" name="id_murid[]"></input>
+                                <input type="" value="{{$Gurume->id}}" name="id_guru[]"></input>
                                 <td class="middle_two">    
-                                    <select id="attendance" name="attendance" onchange="updateSelectColor(this)">
-                                        <option>..</option>
-                                        <option class="status-hadir" value="Hadri">Hadir</option>
+                                    @if($minggu1Kosong)
+                                    <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
+                                        <option></option>
+                                        <option class="status-hadir" value="Hadir">Hadir</option>
                                         <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
                                         <option class="status-izin" value="izin">Izin</option>
                                     </select>
+                                    @else
+                                        @if(minggu1kosong == 'Hadir')
+                                        <input class="status-hadir" value="Hadir">Hadir</input>
+                                        @elseif(minggu1kosong == 'izin')
+                                        <input class="status-izin" value="izin">Izin</input>
+                                        @else
+                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                        @endif
+                                    </select>
+                                    @endif
                                 </td>
-                                <td>
-                                    <select id="attendance" name="attendance" onchange="updateSelectColor(this)">
+
+                            <td>
+                                @if($minggu2Kosong)
+                                    <select id="minggu2" name="minggu2[]" onchange="updateSelectColor(this)">
                                         <option>..</option>
-                                        <option class="status-hadir" value="Hadri">Hadir</option>
+                                        <option class="status-hadir" value="Hadir">Hadir</option>
                                         <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
                                         <option class="status-izin" value="izin">Izin</option>
                                     </select>
+                                    @else
+                                        @if(minggu2kosong == 'Hadir')
+                                        <input class="status-hadir" value="Hadir">Hadir</input>
+                                        @elseif(minggu2kosong == 'izin')
+                                        <input class="status-izin" value="izin">Izin</input>
+                                        @else
+                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                        @endif
+                                    </select>
+                                    @endif
                                 </td>
-                                <td>
-                                    <select id="attendance" name="attendance" onchange="updateSelectColor(this)">
+
+                            <td>
+                                @if($minggu3Kosong)
+                                    <select id="minggu3" name="minggu3[]" onchange="updateSelectColor(this)">
                                         <option>..</option>
-                                        <option class="status-hadir" value="Hadri">Hadir</option>
+                                        <option class="status-hadir" value="Hadir">Hadir</option>
                                         <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
                                         <option class="status-izin" value="izin">Izin</option>
                                     </select>
-                                </td>
-                                <td>
-                                 <select id="attendance" name="attendance" onchange="updateSelectColor(this)">
-                                        <option>..</option>
-                                        <option class="status-hadir" value="Hadri">Hadir</option>
-                                        <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                        <option class="status-izin" value="izin">Izin</option>
+                                    @else
+                                        @if(minggu3kosong == 'Hadir')
+                                        <input class="status-hadir" value="Hadir">Hadir</input>
+                                        @elseif(minggu3kosong == 'izin')
+                                        <input class="status-izin" value="izin">Izin</input>
+                                        @else
+                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                        @endif
                                     </select>
+                                    @endif
                                 </td>
+
+                            <td>
+                                @if($minggu4Kosong)
+                                <select id="minggu4" name="minggu4[]" onchange="updateSelectColor(this)">
+                                    <option>..</option>
+                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                    <option class="status-izin" value="izin">Izin</option>
+                                </select>
+                                @else
+                                    @if(minggu4kosong == 'Hadir')
+                                    <input class="status-hadir" value="Hadir">Hadir</input>
+                                    @elseif(minggu4kosong == 'izin')
+                                    <input class="status-izin" value="izin">Izin</input>
+                                    @else
+                                    <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                    @endif
+                                </select>
+                                @endif
+                            </td>
+
                                 <td><span class="status delivered">AKTIF</span></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <button type="submit">SUBMIT</button>
+                </form>
                 </div>
-
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
 

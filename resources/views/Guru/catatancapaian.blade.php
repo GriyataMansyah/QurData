@@ -22,20 +22,6 @@
             <!-- ================ Details List ================= -->
             <div class="details">
                 <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Indikator Pencapaian / {{$Murid->nama}}</h2>   
-                        <div>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                <ion-icon name="download-outline" class="BigIcon-one"></ion-icon>
-                                <span style="vertical-align: top;">Download Dokumen</span>
-                            </button>
-                        
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne">
-                                <ion-icon name="trash-outline" class="BigIcon-two"></ion-icon>
-                                <span style="vertical-align: top;">Hapus Data Dokumen</span>
-                            </button>
-                        </div>
-                    </div> 
                         <table id="dataTable">
                             <thead>
                                 <tr>
@@ -88,6 +74,26 @@
                                 </td>
                                 
                                 @else
+                                <div class="cardHeader">
+                                    <h2>Indikator Pencapaian / {{$Murid->nama}}</h2>   
+                                    <div>
+                                        <a class="btn btn-primary" onclick="printPage(event)">
+                                            <ion-icon name="download-outline" class="BigIcon-one"></ion-icon>
+                                            <span style="vertical-align: top;">Download Dokumen</span>
+                                        </a>
+                                    
+                                        <button type="button" class="btn btn-primary" onclick="confirmThis()">
+                                            <ion-icon name="trash-outline" class="BigIcon-two"></ion-icon>
+                                            <span style="vertical-align: top;">Hapus Data Dokumen</span>
+                                        </button>
+                                    
+                                        <form id="deleteForm" method="POST" action="{{ route('hapus.capaian.murid', $Murid->id) }}">
+                                            @csrf
+                                            <button type="submit" id="hiddenButton-one" class="btn btn-primary button-five hidden">Simpan</button>
+                                        </form>
+            
+                                    </div>
+                                </div> 
                                 <tr>
                                     @foreach($hasCapaian as $item)
                                     <tr>

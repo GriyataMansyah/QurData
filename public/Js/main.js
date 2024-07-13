@@ -300,3 +300,68 @@ function confirmDelete() {
       }
   });
 }
+
+// <!-- ============ KONFIRMASI PENGHAPUSAN CAPAIAN PADA MURID===================== -->
+function confirmThis() {
+  Swal.fire({
+      title: 'Anda yakin?',
+      text: "Anda akan menghapus semua data Capaian Pada Murid Ini. Proses ini tidak dapat dibatalkan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus semua!',
+      cancelButtonText: 'Batal'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          document.getElementById('deleteForm').submit();
+      }
+  });
+}
+
+
+
+function printPage() {
+  var url = "{{ route('guru.output') }}";
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = 'document'; 
+
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          var newDoc = xhr.response;
+          
+          // Membuat jendela cetak sementara
+          var printWindow = window.open('', '_blank');
+          printWindow.document.open();
+          printWindow.document.write(newDoc.documentElement.innerHTML);
+          printWindow.document.close();
+          
+          // Mencetak dokumen di jendela cetak sementara
+          printWindow.onload = function() {
+              printWindow.print();
+              printWindow.close();
+              
+              // Tampilkan pemberitahuan setelah pencetakan selesai
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Halaman dicetak',
+                  text: 'Halaman ini dicetak tanpa memindahkan Anda dari halaman saat ini.',
+              });
+          };
+      } else {
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Gagal memuat halaman untuk mencetak!',
+          });
+      }
+  };
+
+  xhr.send();
+
+  function submitFormAbsensi(){
+    document.getElementById('hiddenSubmitButtonAbsensi').click();
+  };
+}

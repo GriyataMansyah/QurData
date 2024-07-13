@@ -6,6 +6,7 @@ use App\Models\Akun;
 use App\Models\Guru;
 use App\Models\Admin;
 use App\Models\Murid;
+use App\Models\Absensi;
 use App\Models\Capaian;
 use App\Models\Superadmin;
 use App\Models\Datacapaian;
@@ -29,10 +30,36 @@ class GuruController extends Controller
         return view('Guru/dashboard', compact('Murid','Guru','Admin','Superadmin','Muridall','Guruall','Adminall','Superadminall'));
     }
 
-    public function absensi()
+    public function absensi(Request $request)
     {
-        $Muridall = Murid::all();
-        return view('Guru/absensi', compact('Muridall'));
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        $muridAll = Murid::all();
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+        
+        $absensi = Absensi::where('bulan', $bulan)
+                          ->where('tahun', $tahun)
+                          ->get();
+
+        $minggu1Kosong = $absensi->filter(function ($item) {
+            return $item->minggu1 === null || $item->minggu1 === '';
+        })->isEmpty();
+
+        $minggu2Kosong = $absensi->filter(function ($item) {
+            return $item->minggu2 === null || $item->minggu2 === '';
+        })->isEmpty();
+
+        $minggu3Kosong = $absensi->filter(function ($item) {
+            return $item->minggu3 === null || $item->minggu3 === '';
+        })->isEmpty();
+
+        $minggu4Kosong = $absensi->filter(function ($item) {
+            return $item->minggu4 === null || $item->minggu4 === '';
+        })->isEmpty();
+
+        return view('Guru/absensi', compact('muridAll','Gurume','minggu1Kosong','minggu2Kosong','minggu3Kosong','minggu4Kosong','bulan','tahun'));
     }
 
     public function capaian()
@@ -71,6 +98,11 @@ class GuruController extends Controller
         $Akun = Akun::where('id',$IdAkun)->first();
         $Gurume = Guru::where('id_akun', $IdAkun)->first();
         return view('Guru/setting',  compact('Gurume','Akun'));
+    }
+
+    public function output()
+    {
+        return view('Guru/output');
     }
 
     public function Addmurid(Request $request)
@@ -167,7 +199,6 @@ class GuruController extends Controller
 
     public function Addcatatan(Request $request)
 {
-    // Validasi data
     $validatedData = $request->validate([
         'data.*.nama_indikator' => 'required|string|max:255',
         'data.*.status' => 'required|string|max:255',
@@ -176,7 +207,6 @@ class GuruController extends Controller
         'id_guru' => 'required|exists:Guru,id',
     ]);
 
-    // Simpan data
     foreach ($validatedData['data'] as $data) {
         Capaian::create([
             'nama_indikator' => $data['nama_indikator'],
@@ -187,7 +217,6 @@ class GuruController extends Controller
         ]);
     }
 
-    // Redirect dengan pesan sukses
     return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
 }
 
@@ -198,4 +227,59 @@ class GuruController extends Controller
 
     return redirect()->back()->with('berhasil', 'Semua data Capaian telah dihapus.');
 }
+
+
+    public function hapusCapaianMurid($id)
+    {
+        Capaian::where('id_murid', $id)->delete();
+
+        return redirect()->route('guru/capaian')->with('berhasil', 'Data capaian murid berhasil dihapus.');
+    }
+
+   public function saveAbsensi(Request $request)
+{
+    $tahun = $request->input('tahun');
+    $bulan = $request->input('bulan');
+    $id_murid = $request->input('id_murid');
+    $id_guru = $request->input('id_guru');
+    $minggu1 = $request->input('minggu1');
+    $minggu2 = $request->input('minggu2');
+    $minggu3 = $request->input('minggu3');
+    $minggu4 = $request->input('minggu4');
+
+    foreach ($id_murid as $key => $muridId) {
+        // Cek apakah data absensi sudah ada
+        $absensi = Absensi::where('tahun', $tahun)
+            ->where('bulan', $bulan)
+            ->where('id_murid', $muridId)
+            ->first();
+
+        if ($absensi) {
+            // Jika data sudah ada, update data absensi yang sudah ada
+            $absensi->id_guru = $id_guru[$key];
+            $absensi->minggu1 = $minggu1[$key] ?? null;
+            $absensi->minggu2 = $minggu2[$key] ?? null;
+            $absensi->minggu3 = $minggu3[$key] ?? null;
+            $absensi->minggu4 = $minggu4[$key] ?? null;
+            $absensi->save();
+        } else {
+            // Jika data belum ada, buat data baru
+            Absensi::create([
+                'tahun' => $tahun,
+                'bulan' => $bulan,
+                'id_murid' => $muridId,
+                'id_guru' => $id_guru[$key],
+                'minggu1' => $minggu1[$key] ?? null,
+                'minggu2' => $minggu2[$key] ?? null,
+                'minggu3' => $minggu3[$key] ?? null,
+                'minggu4' => $minggu4[$key] ?? null,
+            ]);
+        }
+    }
+
+    return redirect()->route('guru/absensi')->with('berhasil', 'Data absensi berhasil disimpan');
 }
+
+}
+
+

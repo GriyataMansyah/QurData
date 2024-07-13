@@ -90,6 +90,9 @@ Route::get('guru/capaian', [GuruController::class, 'capaian'])->name('guru/capai
 // ================== Menampilkan Data Catatan Capaian ====================
 Route::get('guru/catatancapaian/{id}', [GuruController::class, 'catatancapaian'])->name('guru/catatancapaian');
 
+// ============================ Menampilkan Output ========================
+Route::get('guru/output', [GuruController::class, 'output'])->name('guru/output');
+
 // ====================== Menampilkan Data Murid ==========================
 Route::get('guru/datamurid', [GuruController::class, 'datamurid'])->name('guru/datamurid');
 
@@ -116,6 +119,11 @@ Route::post('/submit-capaian', [GuruController::class, 'Addcatatan'])->name('cap
 
 // ========== Menghapus Semua Data Pada Data Capaian ======================
 Route::post('/hapus-semua-capaian', [GuruController::class, 'hapusSemuaCapaian'])->name('hapus.semua.capaian');
+
+// ========== Menghapus Semua Data Pada Data Capaian Murid ================
+Route::post('/hapus-capaian-murid/{id}', [GuruController::class, 'hapusCapaianMurid'])->name('hapus.capaian.murid');
+
+Route::post('/absensi/save', [GuruController::class, 'saveAbsensi'])->name('simpanAbsensi');
 
 
 

@@ -39,12 +39,12 @@
                         <div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <ion-icon name="add-circle-outline" class="BigIcon-one"></ion-icon>
-                                <span style="vertical-align: top;">Tambah Data Capaian</span>
+                                <span style="vertical-align: top;"></span>
                             </button>
-                        
+                        {{-- BUATLAH INI 2 TOMBOL JADI MENYALA ABANGKYUUUUU --}}
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne">
                                 <ion-icon name="trash-outline" class="BigIcon-one"></ion-icon>
-                                <span style="vertical-align: top;">Hapus Data Capaian</span>
+                                <span style="vertical-align: top;"></span>
                             </button>
                         </div>
                     </div>
