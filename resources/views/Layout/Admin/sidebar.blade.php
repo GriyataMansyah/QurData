@@ -20,6 +20,15 @@
             </li>
 
             <li>
+                <a href="{{ route('admin/indikator')}}">
+                    <span class="icon">
+                        <ion-icon name="layers-outline"></ion-icon>
+                    </span>
+                    <span class="title">Kelola Data Indikator</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('admin/dataguru')}}">
                     <span class="icon">
                         <ion-icon name="people-outline"></ion-icon>

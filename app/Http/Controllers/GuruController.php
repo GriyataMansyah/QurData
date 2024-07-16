@@ -38,6 +38,15 @@ class GuruController extends Controller
         $muridAll = Murid::all();
         $bulan = $request->input('bulan');
         $tahun = $request->input('tahun');
+
+        $muridIds = $muridAll->pluck('id');
+
+        $tampilkanAbsensi = Absensi::where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
         
         $absensi = Absensi::where('bulan', $bulan)
                           ->where('tahun', $tahun)
@@ -59,7 +68,8 @@ class GuruController extends Controller
             return $item->minggu4 === null || $item->minggu4 === '';
         })->isEmpty();
 
-        return view('Guru/absensi', compact('muridAll','Gurume','minggu1Kosong','minggu2Kosong','minggu3Kosong','minggu4Kosong','bulan','tahun'));
+       
+        return view('Guru/absensi', compact('tampilkanAbsensi','muridAll','Gurume','minggu1Kosong','minggu2Kosong','minggu3Kosong','minggu4Kosong','bulan','tahun'));
     }
 
     public function capaian()
@@ -167,35 +177,35 @@ class GuruController extends Controller
     }
     
 
-    public function AddCapaian(Request $request)
-    {
+    // public function AddCapaian(Request $request)
+    // {
 
-    $request->validate([
-        'id' => 'required|exists:Guru,id',
-        'capaian' => 'required|array',
-        'capaian.*' => 'required|string|max:255'
-    ]);
+    // $request->validate([
+    //     'id' => 'required|exists:Guru,id',
+    //     'capaian' => 'required|array',
+    //     'capaian.*' => 'required|string|max:255'
+    // ]);
 
-        $gurumeId = $request->id;
+    //     $gurumeId = $request->id;
 
-        foreach ($request->capaian as $capaian) {
-            Datacapaian::create([
-                'nama' => $capaian,
-                'guru_id' => $gurumeId
-            ]);
-        }
+    //     foreach ($request->capaian as $capaian) {
+    //         Datacapaian::create([
+    //             'nama' => $capaian,
+    //             'guru_id' => $gurumeId
+    //         ]);
+    //     }
 
-        return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil ditambahkan.'); 
-    }
+    //     return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil ditambahkan.'); 
+    // }
 
 
-    public function Removecapaian($id)
-    {
-    $capaian = Datacapaian::find($id);
-    $capaian->delete();
+    // public function Removecapaian($id)
+    // {
+    // $capaian = Datacapaian::find($id);
+    // $capaian->delete();
 
-    return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil dihapus.');
-    }
+    // return redirect()->route('guru/capaian')->with('berhasil', 'Capaian berhasil dihapus.');
+    // }
 
     public function Addcatatan(Request $request)
 {

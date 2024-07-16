@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('Datacapaian', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->UnsignedBigInteger('guru_id');
-            $table->foreign('guru_id')->references('id')->on('Guru')->onDelete('cascade');
+            $table->UnsignedBigInteger('admin_id');
+            $table->foreign('admin_id')->references('id')->on('Admin')->onDelete('cascade');
             $table->timestamps();
         });
     }

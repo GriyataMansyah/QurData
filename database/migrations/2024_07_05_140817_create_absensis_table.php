@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('tahun');
             $table->string('bulan');
-            $table->string('minggu1');
-            $table->string('minggu2');
-            $table->string('minggu3');
-            $table->string('minggu4');
+            $table->string('minggu1')->nullable();
+            $table->string('minggu2')->nullable();
+            $table->string('minggu3')->nullable();
+            $table->string('minggu4')->nullable();
             $table->UnsignedBigInteger('id_murid');
             $table->UnsignedBigInteger('id_guru');
             $table->foreign('id_murid')->references('id')->on('Murid')->onDelete('Cascade');

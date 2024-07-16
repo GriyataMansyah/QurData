@@ -13,6 +13,6 @@ class Datacapaian extends Model
 
     protected $fillable = [
         'nama',
-        'guru_id'
+        'admin_id'
     ];
 }

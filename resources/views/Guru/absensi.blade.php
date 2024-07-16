@@ -14,6 +14,18 @@
 </head>
 
 <body>
+    @if(Session::has('berhasil'))
+    <script>
+        console.log('SweetAlert akan muncul.');
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: '{{ Session::get("berhasil") }}',
+            showConfirmButton: true, 
+            timer: 2000 
+        });
+    </script>
+    @endif
      <!-- ========================= SideBar ==================== -->
      @include('Layout/Guru/sidebar')
      <!-- ========================= Main ==================== -->
@@ -79,30 +91,34 @@
                         <tbody>
                             <form method="post" action="{{route('simpanAbsensi')}}">    
                             @csrf
-                            <input type="" value="{{$tahun}}" name="tahun"></input>     
-                            <input type="" value="{{$bulan}}" name="bulan"></input>               
+                            <input type="hidden" value="{{$tahun}}" name="tahun"></input>     
+                            <input type="hidden" value="{{$bulan}}" name="bulan"></input>               
                             <tr>
                                 @foreach ($muridAll as $A)
                                 <td>{{ $A->nama }}</td>
-                                <input type="" value="{{$A->id}}" name="id_murid[]"></input>
-                                <input type="" value="{{$Gurume->id}}" name="id_guru[]"></input>
-                                <td class="middle_two">    
-                                    @if($minggu1Kosong)
-                                    <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
-                                        <option></option>
-                                        <option class="status-hadir" value="Hadir">Hadir</option>
-                                        <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                        <option class="status-izin" value="izin">Izin</option>
-                                    </select>
-                                    @else
-                                        @if(minggu1kosong == 'Hadir')
-                                        <input class="status-hadir" value="Hadir">Hadir</input>
-                                        @elseif(minggu1kosong == 'izin')
-                                        <input class="status-izin" value="izin">Izin</input>
+                                <input type="hidden" value="{{$A->id}}" name="id_murid[]"></input>
+                                <input type="hidden" value="{{$Gurume->id}}" name="id_guru[]"></input>
+                            
+                                <td class="middle_two">                        
+                                    @if($tampilkanAbsensi->has($A->id))
+                                        <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
+                                        @if(in_array($absensiMurid->minggu1, ['Hadir', 'Tidak Hadir', 'Izin']))
+                                            <input type="text" value="{{ $absensiMurid->minggu1 }}">
                                         @else
-                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                            <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
+                                                <option></option>
+                                                <option class="status-hadir" value="Hadir">Hadir</option>
+                                                <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                <option class="status-izin" value="izin">Izin</option>
+                                            </select>
                                         @endif
-                                    </select>
+                                    @else
+                                        <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
+                                            <option></option>
+                                            <option class="status-hadir" value="Hadir">Hadir</option>
+                                            <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                            <option class="status-izin" value="izin">Izin</option>
+                                        </select>
                                     @endif
                                 </td>
 

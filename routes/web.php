@@ -71,6 +71,18 @@ Route::post('/changeadmin',[AdminController::class, 'gantiidentitasadmin'])->nam
 // ======================= Menghapus Guru ================================
 Route::delete('/removeguru',[AdminController::class, 'Removeguru'])->name('Removeguru');
 
+// ====================== Menampilkan Data Indikator =====================
+Route::get('/dataindikator',[AdminController::class, 'dataindikator'])->name('admin/indikator');
+
+// ====================== Menambahkan Data Indikator =====================
+Route::post('/addcapaian',[AdminController::class, 'Addcapaian'])->name('Addcapaian');
+
+// ====================== Menghapus Data Indikator =====================
+Route::delete('/hapus-capaian/{id}', [AdminController::class, 'Removecapaian'])->name('hapuscapaian');
+
+// ====================== Mengedit Data Indikator =====================
+Route::get('/edit-capaian/{id}', [AdminController::class, 'Editcapaian'])->name('editcapaian');
+
 
 
 
@@ -109,10 +121,10 @@ Route::delete('/removemurid',[GuruController::class, 'Removemurid'])->name('Remo
 Route::post('/change',[GuruController::class, 'gantiidentitas'])->name('gantiidentitas');
 
 // ================== Tambah DataMaster Capaian ===========================
-Route::post('/addcapaian',[GuruController::class, 'Addcapaian'])->name('Addcapaian');
+// Route::post('/addcapaian',[GuruController::class, 'Addcapaian'])->name('Addcapaian');
 
 // ================== Hapus DataMaster Capaian ============================
-Route::delete('/hapus-capaian/{id}', [GuruController::class, 'Removecapaian'])->name('capaian.hapus');
+// Route::delete('/hapus-capaian/{id}', [GuruController::class, 'Removecapaian'])->name('capaian.hapus');
 
 // =============== Guru Membuat Catatan Untuk Murid =======================
 Route::post('/submit-capaian', [GuruController::class, 'Addcatatan'])->name('capaian.store');

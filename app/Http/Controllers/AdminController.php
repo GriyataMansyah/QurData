@@ -6,7 +6,9 @@ use App\Models\Akun;
 use App\Models\Guru;
 use App\Models\Admin;
 use App\Models\Murid;
+use App\Models\Capaian;
 use App\Models\Superadmin;
+use App\Models\Datacapaian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,6 +38,62 @@ class AdminController extends Controller
         $Muridall = Murid::all();
         return view('admin/datamurid', compact('Muridall'));
     }
+
+    public function dataindikator()
+    {
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Admin = Admin::where('id_akun', $IdAkun)->first();
+        $capaians = Capaian::all();
+        $data = Datacapaian::all();
+        return view('admin/dataindikator', compact('data','capaians','Admin'));
+    }
+
+      public function AddCapaian(Request $request)
+    {
+
+    $request->validate([
+        'id' => 'required|exists:Guru,id',
+        'capaian' => 'required|array',
+        'capaian.*' => 'required|string|max:255'
+    ]);
+
+        $gurumeId = $request->id;
+
+        foreach ($request->capaian as $capaian) {
+            Datacapaian::create([
+                'nama' => $capaian,
+                'admin_id' => $gurumeId
+            ]);
+        }
+
+        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil ditambahkan.'); 
+    }
+
+    public function Editcapaian(Request $request, $id)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255'
+        ]);
+
+        $capaian = Datacapaian::findOrFail($id);
+        $capaian->nama = $request->nama;
+        $capaian->save();
+
+        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil diedit.');
+    }
+
+    public function Removecapaian($id)
+{
+    try {
+        $capaian = Datacapaian::findOrFail($id);
+        $capaian->delete();
+
+        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil dihapus.');
+    } catch (ModelNotFoundException $e) {
+        return redirect()->route('admin/indikator')->with('gagal', 'Data Indikator tidak dapat dihapus karena sudah digunakan.');
+    }
+}
 
     public function setting()
     {
@@ -113,4 +171,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin/dataguru');
     }
+
+    
 }

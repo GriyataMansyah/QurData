@@ -319,6 +319,49 @@ function confirmThis() {
   });
 }
 
+// <!-- ============ KONFIRMASI PENGHAPUSAN DATA CAPAIAN ============================ -->
+function confirmThisForm() {
+  Swal.fire({
+      title: 'Anda yakin?',
+      text: "Anda akan menghapus data Capaian. Proses ini tidak dapat dibatalkan!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Ya, hapus semua!',
+      cancelButtonText: 'Batal'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          document.getElementById('TekanIni').click();
+      }
+  });
+}
+
+
+// <!-- ======================= GANTI WATNA PADA ABSENSI ============================ -->
+function updateSelectColor(selectElement) {
+  if (selectElement.value == "Hadir") {
+      selectElement.className = "status-hadir";
+  } else if (selectElement.value == "Tidak Hadir") {
+      selectElement.className = "status-ga-hadir";
+  } else if (selectElement.value == "izin") {
+      selectElement.className = "status-izin";
+  } else {
+      selectElement.className = "";
+  }
+}
+
+// <!-- ================ MEMBUKA INPUTAN EDIT DATA CAPAIAN ========================== -->
+function tambahInput(id) {
+  const editButton = document.getElementById(`visible-${id}`);
+  const changeDiv = document.getElementById(`change-${id}`);
+
+  // Hide the edit button
+  editButton.style.display = 'none';
+
+  // Show the form div
+  changeDiv.style.display = 'flex';
+}
 
 
 function printPage() {

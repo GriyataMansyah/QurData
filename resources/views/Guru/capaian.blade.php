@@ -36,17 +36,18 @@
                     <div class="cardHeader">
                         <h2>Indikator Pencapaian</h2>   
                       
-                        <div>
+                        {{-- <div>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                 <ion-icon name="add-circle-outline" class="BigIcon-one"></ion-icon>
                                 <span style="vertical-align: top;"></span>
                             </button>
-                        {{-- BUATLAH INI 2 TOMBOL JADI MENYALA ABANGKYUUUUU --}}
+                        
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalOne">
                                 <ion-icon name="trash-outline" class="BigIcon-one"></ion-icon>
                                 <span style="vertical-align: top;"></span>
                             </button>
-                        </div>
+                        </div> --}}
+                        
                     </div>
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
