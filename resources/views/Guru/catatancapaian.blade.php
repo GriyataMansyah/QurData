@@ -75,7 +75,7 @@
                                     </tr>
                                 @endforeach
                                 <td><input type="hidden" value="{{$Murid->id}}" name="id_murid"></td>
-                                <td><input type="hidden" value="{{$Akun->id}}" name="id_guru"></td>
+                                <td><input type="hidden" value="{{$Gurume->id}}" name="id_guru"></td>
                                 <td colspan="3">
                                     
                                         <button type="submit" class="btn btn-primary button-five">Simpan</button>

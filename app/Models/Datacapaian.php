@@ -15,4 +15,5 @@ class Datacapaian extends Model
         'nama',
         'admin_id'
     ];
+
 }

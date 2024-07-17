@@ -12,10 +12,16 @@ class Capaian extends Model
     protected $table="Capaian";
 
     protected $fillable=[
+        'datacapaian_id',
         'nama_indikator',
         'status',
         'keterangan',
         'id_murid',
         'id_guru',
     ];
+
+    public function capaians()
+    {
+        return $this->hasMany(Capaian::class, 'datacapaian_id');
+    }
 }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('Capaian', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('datacapaian_id');
+            $table->foreign('datacapaian_id')->references('id')->on('Datacapaian')->onDelete('cascade');
             $table->string('nama_indikator');
             $table->string('status');
             $table->string('keterangan')->nullable();

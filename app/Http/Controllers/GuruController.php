@@ -88,12 +88,13 @@ class GuruController extends Controller
         $Murid = Murid::find($id);
         $IdAkun = Auth::id();
         $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun',$IdAkun)->first();
         $Capaian = Capaian::where('id_murid', $id)->get();
         $hasCapaian = DB::table('Capaian')
         ->where('id_murid', $id)
         ->get();
 
-        return view('Guru.catatancapaian', compact('Datacapaian', 'Murid','Akun','hasCapaian'));
+        return view('Guru.catatancapaian', compact('Gurume','Datacapaian', 'Murid','Akun','hasCapaian'));
     }
 
     public function datamurid()
@@ -224,12 +225,22 @@ class GuruController extends Controller
         ]);
     
         foreach ($validatedData['data'] as $data) {
+            // Cari id dari Datacapaian berdasarkan nama_indikator
+            $datacapaian = Datacapaian::where('nama', $data['nama_indikator'])->first();
+        
+            // Jika datacapaian tidak ditemukan, bisa di-handle sesuai kebutuhan (misalnya lewati atau beri pesan error)
+            if (!$datacapaian) {
+                continue; // atau tambahkan log atau pesan error
+            }
+        
+            // Buat entri baru di Capaian
             Capaian::create([
                 'nama_indikator' => $data['nama_indikator'],
+                'datacapaian_id' => $datacapaian->id,
                 'status' => $data['status'],
                 'keterangan' => $data['keterangan'],
-                'id_murid' => $validatedData['id_murid'], // Ambil id_murid dari input form
-                'id_guru' => $validatedData['id_guru'], // Ambil id_guru dari input form
+                'id_murid' => $validatedData['id_murid'],
+                'id_guru' => $validatedData['id_guru'],
             ]);
         }
     

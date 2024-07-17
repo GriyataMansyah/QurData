@@ -10,6 +10,7 @@ use App\Models\Capaian;
 use App\Models\Superadmin;
 use App\Models\Datacapaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -75,25 +76,49 @@ class AdminController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255'
         ]);
-
-        $capaian = Datacapaian::findOrFail($id);
-        $capaian->nama = $request->nama;
-        $capaian->save();
-
-        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil diedit.');
+    
+        try {
+            $capaian = Datacapaian::findOrFail($id);
+            $capaian->nama = $request->nama;
+            $capaian->save();
+    
+            $capaians = Capaian::where('datacapaian_id', $id)->get();
+            foreach ($capaians as $capaian_item) {
+                $capaian_item->nama_indikator = $request->nama;
+                $capaian_item->save();
+            }
+    
+            return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil diedit.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin/indikator')->with('gagal', 'Terjadi kesalahan saat mengedit data Indikator.');
+        }
     }
 
     public function Removecapaian($id)
-{
-    try {
-        $capaian = Datacapaian::findOrFail($id);
-        $capaian->delete();
-
-        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil dihapus.');
-    } catch (ModelNotFoundException $e) {
-        return redirect()->route('admin/indikator')->with('gagal', 'Data Indikator tidak dapat dihapus karena sudah digunakan.');
+    {
+        DB::beginTransaction();
+    
+        try {
+            $datacapaian = Datacapaian::findOrFail($id);
+            $relatedCapaian = Capaian::where('datacapaian_id', $id)->exists();
+    
+            if ($relatedCapaian) {
+                throw new \Exception('Tidak dapat menghapus Data Indikator karena masih digunakan.');
+            }
+    
+            $datacapaian->delete();
+    
+            DB::commit();
+    
+            return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil dihapus.');
+        } catch (ModelNotFoundException $e) {
+            DB::rollBack();
+            return redirect()->route('admin/indikator')->with('gagal', 'Data Indikator tidak ditemukan.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin/indikator')->with('gagal', $e->getMessage());
+        }
     }
-}
 
     public function setting()
     {
