@@ -86,13 +86,13 @@
                                         @foreach($capaians as $capaian)
                                         <div class="d-flex align-items-center mb-2">
                                             <input type="text" class="form-control custom-input-two" value="{{ $capaian->nama }}" disabled>
-                                            <form action="{{ route('capaian.hapus', ['id' => $capaian->id]) }}" method="POST" class="delete-form ml-2">
+                                            {{-- <form action="{{ route('capaian.hapus', ['id' => $capaian->id]) }}" method="POST" class="delete-form ml-2">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger delete-icon-two" data-id="{{ $capaian->id }}">
                                                     <ion-icon name="trash-outline"></ion-icon>
                                                 </button>
-                                            </form>
+                                            </form> --}}
                                         </div>
                                         @endforeach
                                     </div>
@@ -107,6 +107,15 @@
                             </div>
                         </div>
                     </div>
+                    
+                    @if($Muridall->isEmpty())
+                    <div class="middle">
+                        <div class="no-data-container">
+                            <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
+                            <h4> Tidak Ada Data </h4>
+                        </div>
+                    </div>
+                    @else
                     <div class="cardHeader">
                         <h5>Hasil capaian, dan catatan khusus untuk murid</h5>  
                     </div>
@@ -128,7 +137,7 @@
                             </tr>
                             @endforeach                            
                         </tbody>
-
+                        @endif
 
 
 

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('Murid', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nik');
-            $table->date('tanggal_lahir');
+            $table->string('nik')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('jenis_kelamin');
-            $table->string('no_hp');
+            $table->string('no_hp')->nullable();
             $table->timestamps();
         });
     }

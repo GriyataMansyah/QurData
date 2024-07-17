@@ -49,7 +49,8 @@
                                @csrf
                                 <div class="form-group custom-form-group">
                                     <label for="nik" class="custom-label">NIK :</label>
-                                    <input type="text" class="form-control custom-input" id="nik" placeholder="Masukkan NIK Murid" name="nik"  pattern="[0-9]{12}" title="NIK harus terdiri dari 12 angka" oninput="allowNumbersOnly(event)" required>
+                                    <input type="text" class="form-control custom-input" id="nik" placeholder="Masukkan NIK Murid" name="nik"  pattern="[0-9]" title="NIK harus terdiri dari 12 angka" oninput="allowNumbersOnly(event)">
+                                    <p class="RandText">NIK Boleh dikosongkan</p>
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="nama" class="custom-label">Nama :</label>
@@ -57,7 +58,8 @@
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="tanggal_Lahir" class="custom-label">Tanggal Lahir :</label>
-                                    <input type="date" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="tanggal_lahir" required>
+                                    <input type="date" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="tanggal_lahir">
+                                    <p class="RandText">Tanggal lahir Boleh dikosongkan</p>
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="gender" class="custom-label">Gender</label>
@@ -69,7 +71,8 @@
                                 </div>
                                 <div class="form-group custom-form-group">
                                     <label for="no_hp" class="custom-label">No Handphone :</label>
-                                    <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Murid" name="no_hp" pattern="[0-9]{11}" title="Masukkan Nomor Hp Yang Valid" required>
+                                    <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Murid" name="no_hp" pattern="[0-9]" title="Masukkan Nomor Hp Yang Valid">
+                                    <p class="RandText">No Handphone Boleh dikosongkan</p>
                                 </div>
                             </div>
                              <div class="modal-footer">
@@ -81,6 +84,14 @@
                  </div>
              </div>
 
+             @if($Muridall->isEmpty())
+             <div class="middle">
+                 <div class="no-data-container">
+                     <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
+                     <h4> Tidak Ada Data </h4>
+                 </div>
+             </div>
+             @else
                     <table>
                         <thead>
                             <tr>
@@ -115,7 +126,7 @@
                         </tbody>
                     </table>
                 </div>
-
+                @endif
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
 

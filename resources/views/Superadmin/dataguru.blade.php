@@ -25,6 +25,15 @@
                     <div class="cardHeader">
                         <h2>Data Data Guru</h2>   
                     </div>
+
+                    @if($Guruall->isEmpty())
+                    <div class="middle">
+                        <div class="no-data-container">
+                            <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
+                            <h4> Tidak Ada Data </h4>
+                        </div>
+                    </div>
+                    @else
                     <table>
                         <thead>
                             <tr>
@@ -51,7 +60,8 @@
                         </tbody>
                     </table>
                 </div>
-
+                @endif
+                
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
 

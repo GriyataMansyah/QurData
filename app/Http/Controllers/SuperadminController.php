@@ -85,11 +85,11 @@ class SuperadminController extends Controller
         $request->validate([
             'username' => 'required',
             'password' => 'required',
-            'nik' => 'required|numeric|min:11',
+            // 'nik' => 'required|numeric|min:11',
             'nama' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
+            // 'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
-            'no_hp' => 'required|numeric',
+            // 'no_hp' => 'required|numeric',
         ]);
 
         $akun = new Akun();

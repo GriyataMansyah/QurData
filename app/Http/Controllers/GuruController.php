@@ -119,11 +119,11 @@ class GuruController extends Controller
     {
         // Validasi input
         $request->validate([
-            'nik' => 'required|numeric|min:11',
+            // 'nik' => 'numeric',
             'nama' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date',
+            // 'tanggal_lahir' => 'date',
             'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
-            'no_hp' => 'required|numeric',
+            // 'no_hp' => 'numeric',
         ]);
 
         // Buat data murid baru

@@ -118,6 +118,13 @@
     height: 340px;
  }
 
+ .RandText{
+    font-size: 12px;
+    margin-top:1px;
+    margin-left:10px;
+    color:#676767;
+ }
+
  .barlow {
     font-family: "Barlow", sans-serif;
     font-weight: 500;
