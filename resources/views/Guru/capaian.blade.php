@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     
-                    @if($Muridall->isEmpty())
+                    @if($Muridall->where('id_guru', $Gurume->id)->isEmpty())
                     <div class="middle">
                         <div class="no-data-container">
                             <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
@@ -129,7 +129,7 @@
                         </thead>
 
                         <tbody>
-                            @foreach($Muridall as $A)
+                            @foreach($Muridall->where('id_guru', $Gurume->id) as $A)
                             <tr>
                                 <td>{{ $A->nama }}</td>
                                 <td><a class="btn btn-primary" href="{{ route('guru/catatancapaian', $A->id) }}">Buka Catatan</a></td>

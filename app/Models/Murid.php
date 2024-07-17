@@ -17,5 +17,6 @@ class Murid extends Model
         "tanggal_lahir",
         "jenis_kelamin",
         "no_hp",
+        "id_guru",
     ];
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('tanggal_lahir')->nullable();
             $table->string('jenis_kelamin');
             $table->string('no_hp')->nullable();
+            $table->unsignedBigInteger('id_guru');
+            $table->foreign('id_guru')->references('id')->on('Guru')->onDelete('cascade');
             $table->timestamps();
         });
     }

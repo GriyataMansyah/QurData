@@ -74,6 +74,7 @@
                                     <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Murid" name="no_hp" pattern="[0-9]" title="Masukkan Nomor Hp Yang Valid">
                                     <p class="RandText">No Handphone Boleh dikosongkan</p>
                                 </div>
+                                <input type="hidden" name="id_guru" value="{{$Gurume->id}}">
                             </div>
                              <div class="modal-footer">
                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -84,7 +85,7 @@
                  </div>
              </div>
 
-             @if($Muridall->isEmpty())
+             @if($Muridall->where('id_guru', $Gurume->id)->isEmpty())
              <div class="middle">
                  <div class="no-data-container">
                      <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
@@ -105,7 +106,8 @@
                         </thead>
 
                         <tbody>
-                            @foreach($Muridall as $A)
+                            @foreach($Muridall->where('id_guru', $Gurume->id) as $A)
+                            
                             <tr>
                                 <td>{{ $A->nama }}</td>
                                 <td>{{ $A->nik }}</td>
@@ -122,7 +124,8 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach 
+                        
                         </tbody>
                     </table>
                 </div>

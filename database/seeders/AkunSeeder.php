@@ -109,6 +109,7 @@ class AkunSeeder extends Seeder
                 'tanggal_lahir' => $faker->date,
                 'jenis_kelamin' => $faker->randomElement(['Laki - Laki', 'Perempuan']),
                 'no_hp' => $faker->phoneNumber,
+                'id_guru' => '1',
             ]);
         }
     }

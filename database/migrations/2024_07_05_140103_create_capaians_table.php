@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_indikator');
             $table->string('status');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->UnsignedBigInteger('id_murid');
             $table->UnsignedBigInteger('id_guru');
             $table->foreign('id_murid')->references('id')->on('Murid')->onDelete('Cascade');

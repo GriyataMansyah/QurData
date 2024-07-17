@@ -22,6 +22,15 @@
             <!-- ================ Details List ================= -->
             <div class="details">
                 <div class="recentOrders">
+
+                    @if($Datacapaian->isEmpty())
+                    <div class="middle">
+                        <div class="no-data-container">
+                            <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
+                            <h4> Tidak Ada Data Indikator<br>Silahkan Hubungi Admin !!</h4>
+                        </div>
+                    </div>
+                    @else 
                         <table id="dataTable">
                             <thead>
                                 <tr>
@@ -50,8 +59,8 @@
                                         <td>
                                             <select 
                                                 name="data[{{ $index }}][status]" 
-                                                onchange="updateSelectColor(this)">
-                                                <option value="">..</option>
+                                                onchange="updateSelectColor(this)" required>
+                                                <option selected disabled>..</option>
                                                 <option class="status-hadir" value="Tercapai">Tercapai</option>
                                                 <option class="status-ga-hadir" value="Tidak">Tidak</option>
                                             </select>
@@ -61,7 +70,7 @@
                                                 name="data[{{ $index }}][keterangan]" 
                                                 id="coolTextarea" 
                                                 class="form-control custom-textarea" 
-                                                rows="4"></textarea>
+                                                rows="4" required></textarea>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -106,6 +115,7 @@
                                 @endif
                             </tbody>
                         </table>  
+                        @endif
                     </form>
                     
                     

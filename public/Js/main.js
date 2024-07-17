@@ -239,6 +239,51 @@ function validateForm() {
   }
 }
 
+// <!-- ======== MEMAKSA ADMIN UNTUK MENGISI JENIS KELAMIN GURU ===================== -->
+function validateFormTeach() {
+  var genderSelect = document.getElementById('gender');
+  var selectedValue = genderSelect.value;
+  
+  // Jika pengguna memilih opsi yang valid
+  if (selectedValue !== '' && selectedValue !== 'Pilih Gender Guru') {
+      return true; // Izinkan pengiriman formulir
+  } else {
+      // Tampilkan SweetAlert
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Silakan pilih jenis kelamin Guru!',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+      });
+      return false; // Mencegah pengiriman formulir
+  }
+}
+
+// <!-- ======== MEMAKSA SUPERADMIN UNTUK MENGISI JENIS KELAMIN ADMIN ===================== -->
+function validateFormAdmin() {
+  var genderSelect = document.getElementById('gender');
+  var selectedValue = genderSelect.value;
+  
+  // Jika pengguna memilih opsi yang valid
+  if (selectedValue !== '' && selectedValue !== 'Pilih Gender Admin') {
+      return true; // Izinkan pengiriman formulir
+  } else {
+      // Tampilkan SweetAlert
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Silakan pilih jenis kelamin Admin!',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+      });
+      return false; // Mencegah pengiriman formulir
+  }
+}
+
+
 // <!-- ======================== TAMBAH INPUTAN CAPAIAN =========================== -->
 document.addEventListener('DOMContentLoaded', function() {
   const addDataButton = document.getElementById('addDataButton');

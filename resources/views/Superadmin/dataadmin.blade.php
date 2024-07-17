@@ -43,7 +43,7 @@
                                  <h5 class="modal-title" id="exampleModalLabel">Tambah Guru</h5>
                                     </div>
                                     <div class="modal-body">
-                                     <form method="Post" action="{{route('Addadmin')}}" onsubmit="return validateForm()">
+                                     <form method="Post" action="{{route('Addadmin')}}" onsubmit="return validateFormAdmin()">
                                       @csrf
                                         <div class="form-group custom-form-group">
                                            <label for="nik" class="custom-label">Username:</label>
@@ -69,7 +69,7 @@
                                        </div>
                                        <div class="form-group custom-form-group">
                                            <label for="gender" class="custom-label">Gender</label>
-                                           <select class="form-control custom-select" id="genderadmin" name="jenis_kelamin" required>
+                                           <select class="form-control custom-select" id="gender" name="jenis_kelamin" required>
                                                <option selected disabled>Pilih Gender Admin</option>
                                                <option value="Laki - Laki">Laki - Laki</option>
                                                <option value="Perempuan">Perempuan</option>

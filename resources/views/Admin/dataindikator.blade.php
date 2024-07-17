@@ -118,7 +118,7 @@
                                             @method('DELETE')
                                         <button type="submit" class="btn btn-danger">
                                             <ion-icon name="trash-outline" class="BigIcon-two"></ion-icon>
-                                            <span style="vertical-align: top;">Hapus Data Indikator {{$C->id}}</span>
+                                            <span style="vertical-align: top;">Hapus Data Indikator</span>
                                         </button>
                                         </form>
                                     </td>

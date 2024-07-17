@@ -98,8 +98,12 @@ class GuruController extends Controller
 
     public function datamurid()
     {
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
         $Muridall = Murid::all();
-        return view('Guru/datamurid', compact('Muridall'));
+        $MuridallGroup = Murid::where('id_guru', $Gurume)->get();
+        return view('Guru/datamurid', compact('Muridall','MuridallGroup','Gurume'));
     }
 
     public function setting()
@@ -124,6 +128,7 @@ class GuruController extends Controller
             // 'tanggal_lahir' => 'date',
             'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
             // 'no_hp' => 'numeric',
+            'id_guru' => 'numeric',
         ]);
 
         // Buat data murid baru
@@ -133,6 +138,7 @@ class GuruController extends Controller
         $murid->tanggal_lahir = $request->tanggal_lahir;
         $murid->jenis_kelamin = $request->jenis_kelamin;
         $murid->no_hp = $request->no_hp;
+        $murid->id_guru = $request->id_guru;
         $murid->save();
 
         return redirect()->route('guru/datamurid')->with('berhasil', 'Data murid berhasil ditambahkan!');
@@ -208,27 +214,28 @@ class GuruController extends Controller
     // }
 
     public function Addcatatan(Request $request)
-{
-    $validatedData = $request->validate([
-        'data.*.nama_indikator' => 'required|string|max:255',
-        'data.*.status' => 'required|string|max:255',
-        'data.*.keterangan' => 'nullable|string',
-        'id_murid' => 'required|exists:Murid,id',
-        'id_guru' => 'required|exists:Guru,id',
-    ]);
-
-    foreach ($validatedData['data'] as $data) {
-        Capaian::create([
-            'nama_indikator' => $data['nama_indikator'],
-            'status' => $data['status'],
-            'keterangan' => $data['keterangan'],
-            'id_murid' => $validatedData['id_murid'],  
-            'id_guru' => $validatedData['id_guru'],   
+    {
+        $validatedData = $request->validate([
+            'data.*.nama_indikator' => 'required|string|max:255',
+            'data.*.status' => 'required|string|max:255',
+            'data.*.keterangan' => 'nullable|string',
+            'id_murid' => 'required|exists:murid,id',
+            'id_guru' => 'required|exists:guru,id',
         ]);
+    
+        foreach ($validatedData['data'] as $data) {
+            Capaian::create([
+                'nama_indikator' => $data['nama_indikator'],
+                'status' => $data['status'],
+                'keterangan' => $data['keterangan'],
+                'id_murid' => $validatedData['id_murid'], // Ambil id_murid dari input form
+                'id_guru' => $validatedData['id_guru'], // Ambil id_guru dari input form
+            ]);
+        }
+    
+        return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
     }
-
-    return redirect()->route('guru/capaian')->with('berhasil', 'Catatan berhasil disimpan');
-}
+    
 
     public function hapusSemuaCapaian()
 {
