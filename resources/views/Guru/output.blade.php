@@ -10,22 +10,40 @@
     <link href="{{ asset('Css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('Images/logo.png')}}" rel="icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <style>
+          @media print {
+            body {
+                -webkit-print-color-adjust: exact; 
+                color-adjust: exact;
+                margin: 0;
+                font-size: 7pt;
+                padding: 0;
+            }
+            /* Atur margin untuk cetakan */
+            @page {
+                margin-top: 10mm;
+                margin-left: 10mm;
+                margin-bottom: -10mm;
+                size: A4; 
+                height: 11in;
+
+            }
+        }
+    </style>
     <title>Capaian (Guru)</title>
 </head>
 
-<body class="Body-One">
-     <p>HALOOOOOOOOOOOOOOOasgagsdgsdgsfhfjfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff</p>
-    
-                    
-                    
+<body class="Body-One" onload="printPage()">
+
+    <h4>Pemberitahuan Keadaan Mahasiswa Dna Siswa</h4>
+
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
-
-    <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="{{ asset('Js/main.js')}}"></script>
-    <script>{window.print();}</script>
+   
 </body>
 
 </html>

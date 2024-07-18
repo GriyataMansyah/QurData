@@ -11,6 +11,36 @@
     <link href="{{ asset('Images/logo.png')}}" rel="icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Capaian (Guru)</title>
+    <script>
+        function printPage() {
+            const fetchUrl = '{{ route('output') }}';
+            const originalContent = document.documentElement.innerHTML;
+    
+            fetch(fetchUrl)
+                .then(response => response.text())
+                .then(data => {
+                    // Buat iframe tersembunyi
+                    const iframe = document.createElement('iframe');
+                    iframe.style.position = 'absolute';
+                    iframe.style.width = '0';
+                    iframe.style.height = '0';
+                    iframe.style.border = 'none';
+                    document.body.appendChild(iframe);
+    
+                    // Masukkan konten ke dalam iframe
+                    iframe.contentDocument.open();
+                    iframe.contentDocument.write(data);
+                    iframe.contentDocument.close();
+    
+                    // Cetak konten dalam iframe
+                    iframe.contentWindow.print();
+
+                })
+                .catch(error => {
+                    console.error('Error fetching content:', error);
+                });
+        }
+    </script>
 </head>
 
 <body>
@@ -86,7 +116,8 @@
                                 <div class="cardHeader">
                                     <h2>Indikator Pencapaian / {{$Murid->nama}}</h2>   
                                     <div>
-                                        <a class="btn btn-primary" onclick="printPage(event)">
+                                        <a class="btn btn-primary" 
+                                        onclick="printPage()">
                                             <ion-icon name="download-outline" class="BigIcon-one"></ion-icon>
                                             <span style="vertical-align: top;">Download Dokumen</span>
                                         </a>

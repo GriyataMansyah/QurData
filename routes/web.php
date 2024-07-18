@@ -103,7 +103,7 @@ Route::get('guru/capaian', [GuruController::class, 'capaian'])->name('guru/capai
 Route::get('guru/catatancapaian/{id}', [GuruController::class, 'catatancapaian'])->name('guru/catatancapaian');
 
 // ============================ Menampilkan Output ========================
-Route::get('guru/output', [GuruController::class, 'output'])->name('guru/output');
+Route::get('guru/output', [GuruController::class, 'output'])->name('output');
 
 // ====================== Menampilkan Data Murid ==========================
 Route::get('guru/datamurid', [GuruController::class, 'datamurid'])->name('guru/datamurid');
