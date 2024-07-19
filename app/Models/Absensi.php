@@ -20,5 +20,9 @@ class Absensi extends Model
         "minggu4",
         "id_murid",
         "id_guru",
+        "time1",
+        "time2",
+        "time3",
+        "time4",    
     ];
 }

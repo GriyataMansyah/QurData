@@ -264,35 +264,27 @@ class GuruController extends Controller
         return redirect()->route('guru/capaian')->with('berhasil', 'Data capaian murid berhasil dihapus.');
     }
 
-   public function saveAbsensi(Request $request)
-{
-    $tahun = $request->input('tahun');
-    $bulan = $request->input('bulan');
-    $id_murid = $request->input('id_murid');
-    $id_guru = $request->input('id_guru');
-    $minggu1 = $request->input('minggu1');
-    $minggu2 = $request->input('minggu2');
-    $minggu3 = $request->input('minggu3');
-    $minggu4 = $request->input('minggu4');
-
-    foreach ($id_murid as $key => $muridId) {
-        // Cek apakah data absensi sudah ada
-        $absensi = Absensi::where('tahun', $tahun)
-            ->where('bulan', $bulan)
-            ->where('id_murid', $muridId)
-            ->first();
-
-        if ($absensi) {
-            // Jika data sudah ada, update data absensi yang sudah ada
-            $absensi->id_guru = $id_guru[$key];
-            $absensi->minggu1 = $minggu1[$key] ?? null;
-            $absensi->minggu2 = $minggu2[$key] ?? null;
-            $absensi->minggu3 = $minggu3[$key] ?? null;
-            $absensi->minggu4 = $minggu4[$key] ?? null;
-            $absensi->save();
-        } else {
-            // Jika data belum ada, buat data baru
-            Absensi::create([
+    public function saveAbsensi(Request $request)
+    {
+        $tahun = $request->input('tahun');
+        $bulan = $request->input('bulan');
+        $id_murid = $request->input('id_murid');
+        $id_guru = $request->input('id_guru');
+        $minggu1 = $request->input('minggu1');
+        $minggu2 = $request->input('minggu2');
+        $minggu3 = $request->input('minggu3');
+        $minggu4 = $request->input('minggu4');
+        $date = now(); // Tidak diubah formatnya
+    
+        foreach ($id_murid as $key => $muridId) {
+            // Cek apakah data absensi sudah ada
+            $absensi = Absensi::where('tahun', $tahun)
+                ->where('bulan', $bulan)
+                ->where('id_murid', $muridId)
+                ->first();
+    
+            // Data yang akan disimpan
+            $data = [
                 'tahun' => $tahun,
                 'bulan' => $bulan,
                 'id_murid' => $muridId,
@@ -301,12 +293,35 @@ class GuruController extends Controller
                 'minggu2' => $minggu2[$key] ?? null,
                 'minggu3' => $minggu3[$key] ?? null,
                 'minggu4' => $minggu4[$key] ?? null,
-            ]);
+            ];
+    
+            // Cek dan tambahkan nilai time berdasarkan kondisi minggu
+            if (!empty($minggu1[$key])) {
+                $data['time1'] = $date;
+            }
+            if (!empty($minggu2[$key])) {
+                $data['time2'] = $date;
+            }
+            if (!empty($minggu3[$key])) {
+                $data['time3'] = $date;
+            }
+            if (!empty($minggu4[$key])) {
+                $data['time4'] = $date;
+            }
+    
+            if ($absensi) {
+                // Jika data sudah ada, update data absensi yang sudah ada
+                $absensi->update($data);
+            } else {
+                // Jika data belum ada, buat data baru
+                Absensi::create($data);
+            }
         }
+    
+        return redirect()->route('guru/absensi')->with('berhasil', 'Data absensi berhasil disimpan');
     }
-
-    return redirect()->route('guru/absensi')->with('berhasil', 'Data absensi berhasil disimpan');
-}
+    
+    
 
 }
 

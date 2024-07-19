@@ -87,7 +87,14 @@
                                     
                                 </td>
                             </tr>
+
+                            <form method="post" action="{{route('simpanAbsensi')}}"> 
+                                @csrf
+                              <input type="hidden" value="{{$tahun}}" name="tahun">
+                              <input type="hidden" value="{{$bulan}}" name="bulan">
+                               @if($tahun && $bulan)
                             <tr>
+                                
                                 <td>Nama</td>
                                 <td class="offside"><p class="text-one">Minggu 1</p></td>
                                 <td class="offside"><p class="text-one">Minggu 2</p></td>
@@ -96,23 +103,35 @@
                                 <td>Status</td>
                             </tr>
                         </thead>
-
+                           
                         <tbody>
-                            <form method="post" action="{{route('simpanAbsensi')}}">    
-                            @csrf
-                            <input type="hidden" value="{{$tahun}}" name="tahun"></input>     
-                            <input type="hidden" value="{{$bulan}}" name="bulan"></input>               
-                            <tr>
-                                @foreach ($muridAll as $A)
-                                <td>{{ $A->nama }}</td>
-                                <input type="hidden" value="{{$A->id}}" name="id_murid[]"></input>
-                                <input type="hidden" value="{{$Gurume->id}}" name="id_guru[]"></input>
                             
-                                <td class="middle_two">                        
-                                    @if($tampilkanAbsensi->has($A->id))
-                                        <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
-                                        @if(in_array($absensiMurid->minggu1, ['Hadir', 'Tidak Hadir', 'Izin']))
-                                            <input type="text" value="{{ $absensiMurid->minggu1 }}">
+                             
+                                @foreach ($muridAll as $A)
+                                <tr>
+                                    <td>{{ $A->nama }}</td>
+                                    <input type="hidden" value="{{$A->id}}" name="id_murid[]">
+                                    <input type="hidden" value="{{$Gurume->id}}" name="id_guru[]">
+                                
+                                    <td class="middle_two">                        
+                                        @if($tampilkanAbsensi->has($A->id))
+                                            <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
+                                            @if($absensiMurid->minggu1)
+                                                <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
+                                                    <option value="{{ $absensiMurid->minggu1 }}"> {{ $absensiMurid->minggu1 }}</option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                                <input type="date" name="time1" class="hidden"></td>
+                                            @else
+                                                <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
+                                                    <option></option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @endif
                                         @else
                                             <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
                                                 <option></option>
@@ -121,83 +140,111 @@
                                                 <option class="status-izin" value="izin">Izin</option>
                                             </select>
                                         @endif
-                                    @else
-                                        <select id="minggu1" name="minggu1[]" onchange="updateSelectColor(this)">
-                                            <option></option>
-                                            <option class="status-hadir" value="Hadir">Hadir</option>
-                                            <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                            <option class="status-izin" value="izin">Izin</option>
-                                        </select>
-                                    @endif
-                                </td>
-
-                            <td>
-                                @if($minggu2Kosong)
-                                    <select id="minggu2" name="minggu2[]" onchange="updateSelectColor(this)">
-                                        <option>..</option>
-                                        <option class="status-hadir" value="Hadir">Hadir</option>
-                                        <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                        <option class="status-izin" value="izin">Izin</option>
-                                    </select>
-                                    @else
-                                        @if(minggu2kosong == 'Hadir')
-                                        <input class="status-hadir" value="Hadir">Hadir</input>
-                                        @elseif(minggu2kosong == 'izin')
-                                        <input class="status-izin" value="izin">Izin</input>
+                                    </td>
+                        
+                                    <td>
+                                        @if($tampilkanAbsensi->has($A->id))
+                                            <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
+                                            @if($absensiMurid->minggu2)
+                                                <select id="minggu2" name="minggu2[]" onchange="updateSelectColor(this)">
+                                                    <option value="{{ $absensiMurid->minggu2 }}">{{ $absensiMurid->minggu2 }}</option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @else
+                                                <select id="minggu2" name="minggu2[]" onchange="updateSelectColor(this)">
+                                                    <option></option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @endif
                                         @else
-                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                            <select id="minggu2" name="minggu2[]" onchange="updateSelectColor(this)">
+                                                <option></option>
+                                                <option class="status-hadir" value="Hadir">Hadir</option>
+                                                <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                <option class="status-izin" value="izin">Izin</option>
+                                            </select>
                                         @endif
-                                    </select>
-                                    @endif
-                                </td>
-
-                            <td>
-                                @if($minggu3Kosong)
-                                    <select id="minggu3" name="minggu3[]" onchange="updateSelectColor(this)">
-                                        <option>..</option>
-                                        <option class="status-hadir" value="Hadir">Hadir</option>
-                                        <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                        <option class="status-izin" value="izin">Izin</option>
-                                    </select>
-                                    @else
-                                        @if(minggu3kosong == 'Hadir')
-                                        <input class="status-hadir" value="Hadir">Hadir</input>
-                                        @elseif(minggu3kosong == 'izin')
-                                        <input class="status-izin" value="izin">Izin</input>
+                                    </td>
+                        
+                                    <td>
+                                        @if($tampilkanAbsensi->has($A->id))
+                                            <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
+                                            @if($absensiMurid->minggu3)
+                                                <select id="minggu3" name="minggu3[]" onchange="updateSelectColor(this)">
+                                                    <option value="{{ $absensiMurid->minggu3 }}">{{ $absensiMurid->minggu3 }}</option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @else
+                                                <select id="minggu3" name="minggu3[]" onchange="updateSelectColor(this)">
+                                                    <option></option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @endif
                                         @else
-                                        <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
+                                            <select id="minggu3" name="minggu3[]" onchange="updateSelectColor(this)">
+                                                <option></option>
+                                                <option class="status-hadir" value="Hadir">Hadir</option>
+                                                <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                <option class="status-izin" value="izin">Izin</option>
+                                            </select>
                                         @endif
-                                    </select>
-                                    @endif
-                                </td>
-
-                            <td>
-                                @if($minggu4Kosong)
-                                <select id="minggu4" name="minggu4[]" onchange="updateSelectColor(this)">
-                                    <option>..</option>
-                                    <option class="status-hadir" value="Hadir">Hadir</option>
-                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
-                                    <option class="status-izin" value="izin">Izin</option>
-                                </select>
-                                @else
-                                    @if(minggu4kosong == 'Hadir')
-                                    <input class="status-hadir" value="Hadir">Hadir</input>
-                                    @elseif(minggu4kosong == 'izin')
-                                    <input class="status-izin" value="izin">Izin</input>
-                                    @else
-                                    <input class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</input>
-                                    @endif
-                                </select>
-                                @endif
-                            </td>
-
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
+                                    </td>
+                        
+                                    <td>
+                                        @if($tampilkanAbsensi->has($A->id))
+                                            <?php $absensiMurid = $tampilkanAbsensi[$A->id]->first(); ?>
+                                            @if($absensiMurid->minggu4)
+                                                <select id="minggu4" name="minggu4[]" onchange="updateSelectColor(this)">
+                                                    <option value="{{ $absensiMurid->minggu4 }}">{{ $absensiMurid->minggu4 }}</option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @else
+                                                <select id="minggu4" name="minggu4[]" onchange="updateSelectColor(this)">
+                                                    <option></option>
+                                                    <option class="status-hadir" value="Hadir">Hadir</option>
+                                                    <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                    <option class="status-izin" value="izin">Izin</option>
+                                                </select>
+                                            @endif
+                                        @else
+                                            <select id="minggu4" name="minggu4[]" onchange="updateSelectColor(this)">
+                                                <option></option>
+                                                <option class="status-hadir" value="Hadir">Hadir</option>
+                                                <option class="status-ga-hadir" value="Tidak Hadir">Tidak Hadir</option>
+                                                <option class="status-izin" value="izin">Izin</option>
+                                            </select>
+                                        @endif
+                                    </td>
+                        
+                                    <td><span class="status delivered">AKTIF</span></td>
+                                </tr>
+                                @endforeach
+                                <button type="submit">SUBMIT</button>
+                             </form>
+                           @else
+                           <table>
+                        <tr rowspan="6">
+                    <div class="no-data-container">
+                        <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
+                        <h4> Tidak Ada Data </h4>
+                    </div>
+                </tr>
+            </table>
+                @endif 
                         </tbody>
                     </table>
-                    <button type="submit">SUBMIT</button>
-                </form>
+                    
+                
                 </div>
                 @endif
 

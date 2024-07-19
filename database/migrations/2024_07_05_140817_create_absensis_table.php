@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('minggu2')->nullable();
             $table->string('minggu3')->nullable();
             $table->string('minggu4')->nullable();
+            $table->date('time1')->nullable();
+            $table->date('time2')->nullable();
+            $table->date('time3')->nullable();
+            $table->date('time4')->nullable();
             $table->UnsignedBigInteger('id_murid');
             $table->UnsignedBigInteger('id_guru');
             $table->foreign('id_murid')->references('id')->on('Murid')->onDelete('Cascade');
