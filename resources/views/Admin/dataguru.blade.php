@@ -79,7 +79,7 @@
                                        </div>
                                        <div class="form-group custom-form-group">
                                            <label for="no_hp" class="custom-label">No Handphone :</label>
-                                           <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Guru" name="no_hp" pattern="[0-9]" title="Masukkan Nomor Hp Yang Valid">
+                                           <input type="text" class="form-control custom-input" oninput="allowNumbersOnly(event)" id="no_hp" placeholder="Masukkan Nomor Handphone Guru" name="no_hp" pattern="[0-9]{12}" title="Masukkan Nomor Hp Yang Valid">
                                            <p class="RandText">No Handphone Boleh dikosongkan</p>
                                        </div>
                                    </div>

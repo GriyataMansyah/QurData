@@ -135,7 +135,13 @@ Route::post('/hapus-semua-capaian', [GuruController::class, 'hapusSemuaCapaian']
 // ========== Menghapus Semua Data Pada Data Capaian Murid ================
 Route::post('/hapus-capaian-murid/{id}', [GuruController::class, 'hapusCapaianMurid'])->name('hapus.capaian.murid');
 
+// =================== Menyimpan Absensi Ke Database ======================
 Route::post('/absensi/save', [GuruController::class, 'saveAbsensi'])->name('simpanAbsensi');
+
+// =================== Menampilkan Rekapitulasi Absensi ===================
+Route::get('/rekapitulasi',[GuruController::class, 'rekapitulasi'])->name('guru/rekap');
+
+
 
 
 

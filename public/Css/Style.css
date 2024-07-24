@@ -849,7 +849,24 @@ select{
       margin-top: -23mm;
       margin-left: -10mm;
       margin-bottom: -10mm;
-      size: A4; /* Atur ukuran kertas menjadi A4 */
-  height: 11in; /* Atur tinggi kertas menjadi 11 inci */
+      size: A4; 
+  height: 11in; 
   }
+}
+
+.filterButton{
+  background-color:var(--blue);
+  margin-left: 10px;
+  height:50px;
+  width:80px;
+}
+
+.submitButton{
+  background-color:var(--blue);
+  color:white;
+  border-radius: 10px;
+}
+
+.margin{
+  margin-right:10px;
 }

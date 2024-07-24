@@ -20,11 +20,20 @@
             </li>
 
             <li>
+                <a href="{{ route('guru/rekap')}}">
+                    <span class="icon">
+                        <ion-icon name="list-circle-outline"></ion-icon>
+                    </span>
+                    <span class="title">Rekap Absensi</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('guru/absensi')}}">
                     <span class="icon">
                         <ion-icon name="document-outline"></ion-icon>
                     </span>
-                    <span class="title">Absensi Murid</span>
+                    <span class="title">Kelola Absensi Murid</span>
                 </a>
             </li>
 

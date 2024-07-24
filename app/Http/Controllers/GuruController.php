@@ -115,6 +115,89 @@ class GuruController extends Controller
         return view('Guru/setting',  compact('Gurume','Akun'));
     }
 
+    public function rekapitulasi(Request $request)
+    {
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        $muridAll = Murid::all();
+        $tahun = $request->input('tahun');
+
+        $Januari = Absensi::where('bulan', 'Januari')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Februari = Absensi::where('bulan', 'Februari')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Maret = Absensi::where('bulan', 'Maret')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $April = Absensi::where('bulan', 'April')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Mei = Absensi::where('bulan', 'Mei')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Juni = Absensi::where('bulan', 'Juni')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Juli = Absensi::where('bulan', 'Juli')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Agustus = Absensi::where('bulan', 'Agustus')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $September = Absensi::where('bulan', 'September')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Oktober = Absensi::where('bulan', 'Oktober')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $November = Absensi::where('bulan', 'November')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        $Desember = Absensi::where('bulan', 'Desember')
+            ->where('tahun', $tahun)
+            ->where('id_guru', $Gurume->id)
+            ->get()
+            ->groupBy('id_murid');
+
+        return view('Guru/rekapitulasi',compact('muridAll','tahun','Gurume','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'));
+    }
+
     public function output()
     {
         return view('Guru/output');
@@ -274,7 +357,7 @@ class GuruController extends Controller
         $minggu2 = $request->input('minggu2');
         $minggu3 = $request->input('minggu3');
         $minggu4 = $request->input('minggu4');
-        $date = now(); // Tidak diubah formatnya
+        $date = now();
     
         foreach ($id_murid as $key => $muridId) {
             // Cek apakah data absensi sudah ada
@@ -283,7 +366,6 @@ class GuruController extends Controller
                 ->where('id_murid', $muridId)
                 ->first();
     
-            // Data yang akan disimpan
             $data = [
                 'tahun' => $tahun,
                 'bulan' => $bulan,
@@ -295,31 +377,53 @@ class GuruController extends Controller
                 'minggu4' => $minggu4[$key] ?? null,
             ];
     
-            // Cek dan tambahkan nilai time berdasarkan kondisi minggu
-            if (!empty($minggu1[$key])) {
-                $data['time1'] = $date;
-            }
-            if (!empty($minggu2[$key])) {
-                $data['time2'] = $date;
-            }
-            if (!empty($minggu3[$key])) {
-                $data['time3'] = $date;
-            }
-            if (!empty($minggu4[$key])) {
-                $data['time4'] = $date;
-            }
-    
             if ($absensi) {
-                // Jika data sudah ada, update data absensi yang sudah ada
+                // Update only if the value has changed
+                if ($absensi->minggu1 !== $minggu1[$key] && !empty($minggu1[$key])) {
+                    $data['time1'] = $date;
+                } else {
+                    unset($data['minggu1']);
+                }
+    
+                if ($absensi->minggu2 !== $minggu2[$key] && !empty($minggu2[$key])) {
+                    $data['time2'] = $date;
+                } else {
+                    unset($data['minggu2']);
+                }
+    
+                if ($absensi->minggu3 !== $minggu3[$key] && !empty($minggu3[$key])) {
+                    $data['time3'] = $date;
+                } else {
+                    unset($data['minggu3']);
+                }
+    
+                if ($absensi->minggu4 !== $minggu4[$key] && !empty($minggu4[$key])) {
+                    $data['time4'] = $date;
+                } else {
+                    unset($data['minggu4']);
+                }
+    
                 $absensi->update($data);
             } else {
-                // Jika data belum ada, buat data baru
+                if (!empty($minggu1[$key])) {
+                    $data['time1'] = $date;
+                }
+                if (!empty($minggu2[$key])) {
+                    $data['time2'] = $date;
+                }
+                if (!empty($minggu3[$key])) {
+                    $data['time3'] = $date;
+                }
+                if (!empty($minggu4[$key])) {
+                    $data['time4'] = $date;
+                }
                 Absensi::create($data);
             }
         }
     
         return redirect()->route('guru/absensi')->with('berhasil', 'Data absensi berhasil disimpan');
     }
+    
     
     
 

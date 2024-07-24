@@ -35,8 +35,7 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Absensi Murid</h2>   
-                        <button class="btn btn-primary">Simpan</button>   
+                        <h2>Absensi Murid</h2>    
                     </div>
 
                     @if($muridAll->isEmpty())
@@ -51,9 +50,9 @@
                         <thead>
                             <tr>
                                 <form action="{{ route('guru/absensi') }}" method="GET">
-                                    <td colspan="4">
+                                    <td colspan="3">
                                         Bulan 
-                                        <select name="bulan">
+                                        <select name="bulan" class="margin">
                                             <option selected disabled>...</option>
                                             <option value="Januari" {{ request('bulan') == 'Januari' ? 'selected' : '' }}>Januari</option>
                                             <option value="Februari" {{ request('bulan') == 'Februari' ? 'selected' : '' }}>Februari</option>
@@ -81,14 +80,14 @@
                                                 </option>
                                             @endfor
                                         </select>
-                                        <button type="submit">Filter</button>
+                                        <button type="submit" class="btn btn-primary filterButton">Filter</button>
                                     </td>
                                 </form>
                                     
                                 </td>
                             </tr>
 
-                            <form method="post" action="{{route('simpanAbsensi')}}"> 
+                            <form method="post" action="{{route('simpanAbsensi')}}" id="formSubmit"> 
                                 @csrf
                               <input type="hidden" value="{{$tahun}}" name="tahun">
                               <input type="hidden" value="{{$bulan}}" name="bulan">
@@ -107,7 +106,7 @@
                         <tbody>
                             
                              
-                                @foreach ($muridAll as $A)
+                                @foreach ($muridAll->where('id_guru', $Gurume->id) as $A)
                                 <tr>
                                     <td>{{ $A->nama }}</td>
                                     <input type="hidden" value="{{$A->id}}" name="id_murid[]">
@@ -229,25 +228,22 @@
                                     <td><span class="status delivered">AKTIF</span></td>
                                 </tr>
                                 @endforeach
-                                <button type="submit">SUBMIT</button>
+                                <button type="submit" id="Target" class="submitButton">KIRIM</button>
                              </form>
                            @else
                            <table>
                         <tr rowspan="6">
                     <div class="no-data-container">
-                        <ion-icon name="thumbs-down-outline" class="icon-nodata"></ion-icon>
-                        <h4> Tidak Ada Data </h4>
+                        <ion-icon name="search-outline" class="icon-nodata"></ion-icon>
+                        <h4> Silahkan Pilih Bulan Dan Tahun </h4>
                     </div>
                 </tr>
             </table>
                 @endif 
                         </tbody>
                     </table>
-                    
-                
                 </div>
                 @endif
-
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>
 
@@ -255,6 +251,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="{{ asset('Js/main.js')}}"></script>
+
 
     <!-- ====== Menampilkan Alert Tidak Punya Akses ======= -->
 </body>
