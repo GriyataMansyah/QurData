@@ -38,6 +38,7 @@
                         <h2>Absensi Murid</h2>    
                     </div>
 
+                    
                     @if($muridAll->isEmpty())
                     <div class="middle">
                         <div class="no-data-container">

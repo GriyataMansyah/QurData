@@ -195,7 +195,29 @@ class GuruController extends Controller
             ->get()
             ->groupBy('id_murid');
 
-        return view('Guru/rekapitulasi',compact('muridAll','tahun','Gurume','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'));
+        $attendances = Absensi::where('tahun', $tahun)->get();
+
+        // Group by student
+        $students = $attendances->groupBy('id_murid');
+
+        $attendancePercentages = [];
+
+        foreach ($students as $studentId => $records) {
+            $totalDays = $records->count() * 4; // Assuming 4 weeks per month, adjust as needed
+            $presentCount = 0;
+
+            foreach ($records as $record) {
+                $presentCount += ($record->minggu1 === 'Hadir') ? 1 : 0;
+                $presentCount += ($record->minggu2 === 'Hadir') ? 1 : 0;
+                $presentCount += ($record->minggu3 === 'Hadir') ? 1 : 0;
+                $presentCount += ($record->minggu4 === 'Hadir') ? 1 : 0;
+            }
+
+            // $attendancePercentages[$studentId] = ($presentCount / $totalDays) * 100;
+            $attendancePercentages[$studentId] = round(($presentCount / $totalDays) * 100);
+        }
+
+        return view('Guru/rekapitulasi',compact('muridAll','tahun','Gurume','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember','attendancePercentages'));
     }
 
     public function output()
