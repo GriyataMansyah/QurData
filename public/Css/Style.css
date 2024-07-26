@@ -870,3 +870,19 @@ select{
 .margin{
   margin-right:10px;
 }
+
+.icon_size{
+  font-size: 25px;
+}
+
+.div_custom{
+  padding-right: 35px;
+}
+
+.yes{
+  color:rgb(34, 195, 34)
+}
+
+.no{
+ color: red;
+}
