@@ -36,7 +36,61 @@
 
 <body class="Body-One" onload="printPage()">
 
-    <h4>Pemberitahuan Keadaan Mahasiswa Dna Siswa</h4>
+    <h3 class="mid">Catatan Pencapaian Murid</h3><br><br>
+    <p class="capital">Nama : {{$Murid->nama}}</p>
+    <p class="capital up-p">NIK : {{ $Murid->nik }}</p>
+    {{-- <p class="capital up-p">Persentase Kehadiran :</p> --}}
+    <br>
+
+    <table class="capital-table">
+        <thead>
+            <tr>
+                <td class="offside border number"><p class="text-one">No</p></td>
+                <td class="offside border"><p class="text-one">Nama Capaian</p></td>
+                <td class="offside border status-capaian"><p class="text-one">Status</p></td>
+                <td class="offside border"><p class="text-one">Catatan</p></td>
+            </tr>
+        </thead>     
+        <tbody>
+            @php
+            $no = 1; 
+            @endphp
+            @foreach($Capaian as $capaian)
+                <tr>
+                  
+                    <td class="border">                        
+                        <p class="text-one">{{ $no++ }}</p>
+                    </td>
+                    
+                    
+                     <td class="border">
+                        <p class="text-two">{{ $capaian->nama_indikator }}</p>
+                     </td>
+                  
+                    <td class="border">
+                        <p class="text-one">{{ $capaian->status }}</p>
+                    </td>
+        
+                    <td class="border">
+                        <p class="text-one">{{ $capaian->keterangan }}</p>
+                    </td>
+
+                </tr>
+        </tbody> 
+        @endforeach
+       
+    </table>
+        <!-- Tempat tanda tangan -->
+        <div class="signature-section">
+            <div class="signature">
+                {{-- <p class="capital">Guru Kelas</p>
+                <span class="capital">Tanda Tangan</span> --}}
+            </div>
+            <div class="signature">
+                <p class="capital">Guru Kelas</p>
+                <span class="capital">{{ $Guru->nama }}</span>
+            </div>
+        </div>
 
     <!-- =========== Scripts =========  -->
     <script src="assets/js/main.js"></script>

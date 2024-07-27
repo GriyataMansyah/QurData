@@ -730,6 +730,11 @@ select{
   margin-top: 15px;
 }
 
+.text-two{
+  margin-top: 15px;
+  margin-left:10px;
+}
+
 .hidden{
   display:none;
 }
@@ -883,6 +888,61 @@ select{
   color:rgb(34, 195, 34)
 }
 
+.mid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.capital{
+  font-size: 15px;
+}
+
+.capital-table{
+  font-size: 15px;
+  width:100%;
+}
+
+.border{
+  border: 1px solid rgb(5, 0, 0);
+  margin-left: 15px;
+}
+
 .no{
- color: red;
+    color:red;
+}
+
+.number{
+  width:2px;
+}
+.status-capaian{
+  width:5px;
+}
+
+.up-p{
+  margin-top:-10px;
+}
+
+.container-two {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+.signature-section {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #ffffff;
+  padding-top: 20px;
+  margin-top:18px;
+}
+.signature {
+  width: 30%;
+  text-align: center;
+}
+.signature span {
+  display: block;
+  margin-top: 40px;
+  text-decoration: underline;
 }

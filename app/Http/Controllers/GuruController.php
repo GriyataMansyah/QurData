@@ -220,9 +220,14 @@ class GuruController extends Controller
         return view('Guru/rekapitulasi',compact('muridAll','tahun','Gurume','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember','attendancePercentages'));
     }
 
-    public function output()
+    public function output(Request $request)
     {
-        return view('Guru/output');
+        $id = $request->query('id');
+        $Murid = Murid::find($id);
+        $Capaian = Capaian::where('id_murid', $id)->get();
+        $Guru = Guru::find($Murid->id_guru);
+
+        return view('Guru/output', compact('id', 'Murid', 'Capaian','Guru'));
     }
 
     public function Addmurid(Request $request)
