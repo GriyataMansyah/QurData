@@ -144,9 +144,9 @@
 
         <tr>
             <td colspan="3" style="line-height: 0.4;">
-                <p>8. NPWP    : - </p>
-                <p>9. Nama  : - </p>
-                <p>10. Alamat  : - </p>
+                <p>8. NPWP    : {{$Gurume->nik}} </p>
+                <p>9. Nama  : {{$Gurume->nama}}</p>
+                <p>10. Alamat  : Jl.Duyung Melati Benggawan Solo </p>
             </td>
 
             <td colspan="4" style="line-height: 0.4;">
@@ -294,10 +294,10 @@
                 <p style="text-align: right; padding-right: 8rem;">
                     Batam,{{ \Carbon\Carbon::parse($A->created_at)->format('d F Y') }}
                     {{-- TODAY --}}
-                </p><br><br><br>
+                </p><br>
 
                 <p style="text-align: right; padding-right: 8rem;">
-                    (..............................)
+                    (...................................)
                 </p>
             </td>
         </tr>

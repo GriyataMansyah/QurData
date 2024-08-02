@@ -12,6 +12,7 @@ use App\Models\Capaian;
 use App\Models\Superadmin;
 use App\Models\Datacapaian;
 use Illuminate\Http\Request;
+use App\Models\KantorMuatAsal;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -84,7 +85,7 @@ class GuruController extends Controller
             'ndpmb' => $request->input('ndpmb', 'DEFAULT_NDPBM'),
             'cara_penyerahan' => $request->input('cara_penyerahan', 'DEFAULT_CARA_PENYERAHAN'),
             'nilai_ekspor' => $request->input('nilai_ekspor', 0.00),
-            'freight' => $request->input('freight', 0.00),
+            'freight' => $request->input('freight','Air Plane'),
             'asuransi' => $request->input('asuransi', 0.00),
             'nilai_maklan' => $request->input('nilai_maklan', 0.00),
             'nilai_bea_keluar' => $request->input('nilai_bea_keluar', 0.00),
@@ -148,8 +149,9 @@ class GuruController extends Controller
         $IdAkun = Auth::id();
         $Akun = Akun::where('id',$IdAkun)->first();
         $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        $Kantor = KantorMuatAsal::all();
 
-        return view('Guru/form',compact('Gurume','Akun'));
+        return view('Guru/form',compact('Gurume','Akun','Kantor'));
     }
 
     public function output2(Request $request)
@@ -159,8 +161,11 @@ class GuruController extends Controller
         $Gurume = Guru::where('id_akun', $IdAkun)->first();
         $Forms = Form::where('id_guru', $Gurume->id)->get();
         $A = $Forms->sortByDesc('created_at')->first();
-        
-        return view('Guru/output2',compact('A'));
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id',$IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+
+        return view('Guru/output2',compact('A','Gurume'));
     }
 
     public function absensi(Request $request)

@@ -42,11 +42,11 @@ return new class extends Migration
             $table->string('valuta')->nullable(); // Kolom valuta, bisa null
             $table->string('ndpmb')->nullable(); // Kolom ndpmb, bisa null
             $table->string('cara_penyerahan')->nullable(); // Kolom cara penyerahan, bisa null
-            $table->decimal('nilai_ekspor', 15, 2)->nullable(); // Kolom nilai ekspor, bisa null
-            $table->decimal('freight', 15, 2)->nullable(); // Kolom freight, bisa null
-            $table->decimal('asuransi', 15, 2)->nullable(); // Kolom asuransi, bisa null
-            $table->decimal('nilai_maklan', 15, 2)->nullable(); // Kolom nilai maklan, bisa null
-            $table->decimal('nilai_bea_keluar', 15, 2)->nullable(); // Kolom nilai bea keluar, bisa null
+            $table->string('nilai_ekspor')->nullable(); // Kolom nilai ekspor, bisa null
+            $table->string('freight')->nullable(); // Kolom freight, bisa null
+            $table->string('asuransi')->nullable(); // Kolom asuransi, bisa null
+            $table->string('nilai_maklan')->nullable(); // Kolom nilai maklan, bisa null
+            $table->string('nilai_bea_keluar')->nullable(); // Kolom nilai bea keluar, bisa null
         
             $table->string('hs')->nullable(); // Kolom hs, bisa null
             $table->string('lartas')->nullable(); // Kolom lartas, bisa null
@@ -55,11 +55,11 @@ return new class extends Migration
             $table->string('mark')->nullable(); // Kolom mark, bisa null
             $table->string('tipe')->nullable(); // Kolom tipe, bisa null
             $table->string('negara_asal_barang')->nullable(); // Kolom negara asal barang, bisa null
-            $table->decimal('harga_fob', 15, 2)->nullable(); // Kolom harga fob, bisa null
-            $table->decimal('volume_barang', 15, 2)->nullable(); // Kolom volume barang, bisa null
-            $table->decimal('berat_bersih', 15, 2)->nullable(); // Kolom berat bersih, bisa null
-            $table->decimal('berat_kotor', 15, 2)->nullable(); // Kolom berat kotor, bisa null
-            $table->decimal('harga_satuan_fob', 15, 2)->nullable(); // Kolom harga satuan fob, bisa null
+            $table->string('harga_fob')->nullable(); // Kolom harga fob, bisa null
+            $table->string('volume_barang')->nullable(); // Kolom volume barang, bisa null
+            $table->string('berat_bersih')->nullable(); // Kolom berat bersih, bisa null
+            $table->string('berat_kotor')->nullable(); // Kolom berat kotor, bisa null
+            $table->string('harga_satuan_fob')->nullable(); // Kolom harga satuan fob, bisa null
         
             $table->string('tempat_penerima')->nullable(); // Kolom tempat penerima, bisa null
             $table->date('tanggal')->nullable(); // Kolom tanggal, bisa null
