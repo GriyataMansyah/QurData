@@ -1,6 +1,213 @@
  @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
  @import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Mochiy+Pop+One&display=swap');
  
+ .anak {
+  padding-top: 8px;
+  height: 10px; /* Tinggi awal */
+  width: 100%; /* Lebar penuh */
+  background-color: #ddd; /* Warna latar belakang */
+  transition: height 0.3s ease; /* Efek transisi */
+  overflow:scroll;
+}
+
+.anak.expanded {
+  height: 300px; /* Tinggi ketika memanjang */
+}
+
+.buttonkeramat{
+  width:100%;
+}
+
+ .inputstyle{
+  width:80%;
+  margin-left: 115px;
+}
+
+.whites{
+  margin-left: 15px;
+}
+
+.span_one_one{
+  position: relative; 
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px 10px 0px 0px;
+  margin-top: 10px;
+}
+
+.inputstyle-2{
+  width:80%;
+  margin-left: 110px;
+  margin-bottom:8px;
+}
+
+.Background{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -5; /* Posisi di belakang elemen lain */
+}
+
+.main.active .toggle {
+color: #fff;
+position: fixed;
+right: 0;
+left: initial;
+}
+
+.toggle {
+position: relative;
+width: 60px;
+height: 60px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 2.5rem;
+cursor: pointer;
+}
+
+.wrapper-items{
+  width:100%;
+}
+
+.awh {
+  margin-top:15px;
+}
+
+.wrap-log{
+  width:100%;
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.Sizer{
+  font-size: 26px;
+  margin-left: 115px;
+  margin-top: 20px;
+}
+
+.kanit-thin {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.Logo{
+  width:250px;
+}
+
+.wrap-log-v2{
+  margin-right:2px;
+  width:90%;
+  height:90vh;
+}
+
+.Main {
+  z-index: 2;
+  width:100%;
+  height:104vh;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(73, 64, 64, 0.5); /* Warna putih buram */
+  z-index: 0; /* Overlay di atas Background */
+}
+
+.TA {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  padding-left:51%;
+  border-radius: 0px 0px 40px 0px;
+}
+
+.GU {
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+  border-radius: 40px 0px 0px 40px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.col-8, .col-4 {
+  flex: 1;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, width 0.5s ease-in-out;
+}
+
+.visible {
+  display: block;
+}
+
+.moving-left {
+  transform: translateX(-100%);
+}
+
+.show {
+  opacity: 1;
+  transform: translateX(0); 
+  display: block;
+}
+
+.hide {
+  opacity: 0;
+  transform: translateX(100%); 
+  display: none; 
+}
+
+.red{
+  background-color: red;
+}
+
+.blue{
+  background-color: blue;
+}
+
+.green{
+  background-color: rgb(0, 238, 59);
+}
+
+.whites{
+  margin-left: 15px;
+}
+
+.black{
+  background-color: rgb(0, 0, 0);
+}
+
+.white{
+  background-color: rgb(238, 238, 238);
+}
+
+.hidden{
+  display: none;
+}
+
  :root {
   --blue: #2a2185;
   --white: #fff;
@@ -18,7 +225,7 @@
   
  body{
     background: var(--blue);
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     display:none;
  }
 
@@ -30,10 +237,22 @@
     height: 100vh;
  }
 
+ .geser{
+  margin-left: 550px;
+}
+
  .ChangeVis{
   display:none;
   margin-right:10px;
  }
+
+ .button_one{
+  border-radius: 40px;
+  width:450px;
+  height:60px;
+   margin-left: 320px;
+   margin-top: -20px;
+}
 
  .ChangeVisButton{
   margin-bottom:7px;
@@ -58,6 +277,19 @@
   margin-bottom: 10px; 
 }
 
+.polos {
+  border: none;
+}
+
+.tombol2{
+  margin-left: 400px;
+}
+
+.buttonhey{
+  padding:20px;
+  width:200px;
+}
+
  .div-middle{
     background-color: rgb(187, 187, 187);
     width: 650px;
@@ -73,6 +305,7 @@
     align-items: center;
     overflow: hidden;
     border-radius: 10px 10px 0px 0px;
+    margin-top:78px;
  }
 
 .span_one img {
@@ -271,7 +504,7 @@
     padding: 0 10px;
   }
   
-  .toggle {
+  .toggles {
     position: relative;
     width: 60px;
     height: 60px;
@@ -340,6 +573,7 @@
     text-decoration: none;
   }
   
+  
   .cardBox .card {
     position: relative;
     background: var(--white);
@@ -383,6 +617,64 @@
     text-decoration: none;
   }
   
+
+  /* ======================= Cardsssssss ====================== */
+.cardBox {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+  text-decoration: none;
+}
+
+.cardBox .cards {
+  position: relative;
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  height:150px;
+}
+
+.cardBox .cards .numbers {
+  position: relative;
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.cardBox .cards .cardName {
+  color: var(--black2);
+  font-size: 1.1rem;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+.cardBox .cards .iconBx {
+  font-size: 3.5rem;
+  color: var(--black2);
+  text-decoration: none;
+}
+
+.cardBox .cards:hover {
+  background: var(--blue);
+}
+
+.cardBox .cards:hover .numbers,
+.cardBox .cards:hover .cardName,
+.cardBox .cards:hover .iconBx {
+  color: var(--white);
+  text-decoration: none;
+}
+
+
   /* ================== Order Details List ============== */
   .details {
     position: relative;
@@ -665,6 +957,7 @@
     align-items: center;
     justify-content: center;
     height: 75vh;
+    margin-bottom:20px;
 }
 
 select{
@@ -678,6 +971,25 @@ select{
     margin-bottom: 20px;
     border-radius: 50%;
 }
+
+.details.hidden {
+  display: none;
+}
+
+.back-btn {
+  background-color: #646669;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-btn:hover {
+  background-color: #0056b3;
+}
+
 
 .styled-select {
   position: relative;
@@ -735,6 +1047,16 @@ select{
   margin-left:10px;
 }
 
+.submitbesar{
+  margin-top:30px;
+  height:60px;
+  padding-top: 15px;
+}
+
+.tinggi {
+  height:2px;
+}
+
 .hidden{
   display:none;
 }
@@ -742,10 +1064,11 @@ select{
 .custom-textarea {
   border: 2px solid #3498db;
   border-radius: 10px;
-  padding:0px;
+  padding:5px;
   font-size: 16px;
   background-color: #f9f9f9;
   transition: border-color 0.3s, box-shadow 0.3s;
+  width:100%;
 }
 
 .custom-textarea:focus {
@@ -945,4 +1268,9 @@ select{
   display: block;
   margin-top: 40px;
   text-decoration: underline;
+}
+
+.card-disabled {
+  pointer-events: none; /* Menonaktifkan interaksi seperti klik */
+  opacity: 0.5; /* Membuat elemen tampak tidak aktif */
 }

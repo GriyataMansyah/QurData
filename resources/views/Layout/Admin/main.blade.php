@@ -1,12 +1,12 @@
 <div class="main">
     <div class="topbar">
-        <div class="toggle">
+        <div class="toggles">
             <ion-icon name="menu-outline"></ion-icon>
         </div>
 
         <div class="search">
             <label>                      
-                <input type="text" value="ADMIN" readonly style="text-align: center;">
+                <input type="text" value="PETUGAS" readonly style="text-align: center;">
             </label>
         </div>
 

@@ -83,6 +83,12 @@ Route::delete('/hapus-capaian/{id}', [AdminController::class, 'Removecapaian'])-
 // ====================== Mengedit Data Indikator =====================
 Route::get('/edit-capaian/{id}', [AdminController::class, 'Editcapaian'])->name('editcapaian');
 
+// ====================== Mengedit Data Master =====================
+Route::get('/data-master', [AdminController::class, 'datamaster'])->name('datamaster');
+
+// ====================== Tambah Kantor Pabean Muat Asal =====================
+Route::post('/kantor-pabean-muat-asal', [AdminController::class, 'kantorpabeanmuatasal'])->name('kantorpabeanmuatasal');
+
 
 
 
@@ -141,6 +147,23 @@ Route::post('/absensi/save', [GuruController::class, 'saveAbsensi'])->name('simp
 // =================== Menampilkan Rekapitulasi Absensi ===================
 Route::get('/rekapitulasi',[GuruController::class, 'rekapitulasi'])->name('guru/rekap');
 
+// =================== Menampilkan Daftar Dokumen ===================
+Route::get('/daftardokumen',[GuruController::class, 'dafdok'])->name('guru/dafdok');
+
+// =================== Menampilkan Form ===================
+Route::get('/formulir',[GuruController::class, 'form'])->name('guru/form');
+
+// =============== Tambah Guru Mandiri =======================
+Route::post('/tambah', [GuruController::class, 'Addguru'])->name('nambah');
+
+// =============== Tambah Form =======================
+Route::post('/formulirberhasil', [GuruController::class, 'addForm'])->name('addForm');
+
+// ====================== Menghapus Daftar Dokumen =====================
+Route::delete('/hapus-dokumen/{id}', [GuruController::class, 'hapusdaf'])->name('hapusdafdok');
+
+// =================== Menampilkan Halaman OUTPUT2 ===================
+Route::get('/A',[GuruController::class, 'output2'])->name('output2');
 
 
 

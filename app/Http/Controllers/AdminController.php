@@ -10,6 +10,7 @@ use App\Models\Capaian;
 use App\Models\Superadmin;
 use App\Models\Datacapaian;
 use Illuminate\Http\Request;
+use App\Models\KantorMuatAsal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,26 +51,32 @@ class AdminController extends Controller
         return view('admin/dataindikator', compact('data','capaians','Admin'));
     }
 
-      public function AddCapaian(Request $request)
+    public function kantorpabeanmuatasal (Request $request)
     {
-
-    $request->validate([
-        'id' => 'required|exists:Guru,id',
-        'capaian' => 'required|array',
-        'capaian.*' => 'required|string|max:255'
-    ]);
-
-        $gurumeId = $request->id;
-
-        foreach ($request->capaian as $capaian) {
-            Datacapaian::create([
-                'nama' => $capaian,
-                'admin_id' => $gurumeId
+        // Mengambil data existing dan new dari form
+        $existingData = $request->input('existing_data');
+        $newData = $request->input('new_data', []);
+    
+        // Proses data yang sudah ada
+        foreach ($existingData as $id => $value) {
+            $existingEntry = KantorMuatAsal::find($id);
+            if ($existingEntry) {
+                $existingEntry->nama = $value;
+                $existingEntry->save();
+            }
+        }
+    
+        // Proses data baru
+        foreach ($newData as $value) {
+            KantorMuatAsal::create([
+                'nama' => $value,
+                // Tambahkan kolom lain jika ada
             ]);
         }
-
-        return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil ditambahkan.'); 
+    
+        return redirect()->route('datamaster')->with('berhasil', 'Data berhasil ditambahkan.');
     }
+    
 
     public function Editcapaian(Request $request, $id)
     {
@@ -94,31 +101,17 @@ class AdminController extends Controller
         }
     }
 
-    public function Removecapaian($id)
-    {
-        DB::beginTransaction();
-    
-        try {
-            $datacapaian = Datacapaian::findOrFail($id);
-            $relatedCapaian = Capaian::where('datacapaian_id', $id)->exists();
-    
-            if ($relatedCapaian) {
-                throw new \Exception('Tidak dapat menghapus Data Indikator karena masih digunakan.');
-            }
-    
-            $datacapaian->delete();
-    
-            DB::commit();
-    
-            return redirect()->route('admin/indikator')->with('berhasil', 'Data Indikator berhasil dihapus.');
-        } catch (ModelNotFoundException $e) {
-            DB::rollBack();
-            return redirect()->route('admin/indikator')->with('gagal', 'Data Indikator tidak ditemukan.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('admin/indikator')->with('gagal', $e->getMessage());
-        }
+public function Removecapaian($id)
+{
+    $capaian = KantorMuatAsal::find($id);
+
+    if ($capaian) {
+        $capaian->delete();
+        return redirect()->route('datamaster')->with('berhasil', 'Data berhasil dihapus.');
+    } else {
+        return redirect()->route('datamaster')->with('error', 'Data Kantor Muat Asal tidak ditemukan.');
     }
+}
 
     public function setting()
     {
@@ -126,6 +119,12 @@ class AdminController extends Controller
         $Akun = Akun::where('id',$IdAkun)->first();
         $Gurume = Admin::where('id_akun', $IdAkun)->first();
         return view('admin/setting', compact('Akun','Gurume'));
+    }
+
+    public function datamaster()
+    {
+        $Kantor = KantorMuatAsal::all(); // Mengambil semua data dari tabel KantorMuatAsal
+        return view('admin/datamaster', compact('Kantor'));
     }
 
     public function Addguru(Request $request)
@@ -158,7 +157,7 @@ class AdminController extends Controller
 
         return redirect()->route('admin/dataguru')->with('berhasil', 'Data murid berhasil ditambahkan!');
     }
-
+    
     public function gantiidentitasadmin(Request $request)
     {
         $request->validate([

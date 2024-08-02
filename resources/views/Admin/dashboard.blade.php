@@ -10,7 +10,7 @@
     <link href="{{ asset('Css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('Images/logo.png')}}" rel="icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Dashboard Admin</title>
+    <title>Dashboard Petugas</title>
 </head>
 
 <body>
@@ -23,8 +23,30 @@
             <div class="cardBox">
                 <a class="card">
                     <div>
-                        <div class="numbers">{{$Superadmin}}</div>
-                        <div class="cardName">Super Admin</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Jumlah Data Master</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="analytics-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a class="card">
+                    <div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Berkas Masuk</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="pause-outline"></ion-icon>
+                    </div>
+                </a>
+
+                <a class="card" id="notice-three">
+                    <div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Jumlah Pengekspor</div>
                     </div>
 
                     <div class="iconBx">
@@ -32,36 +54,14 @@
                     </div>
                 </a>
 
-                <a class="card" id="notice-two">
+                <a class="card">
                     <div>
-                        <div class="numbers">{{$Admin}}</div>
-                        <div class="cardName">Admin</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Jumlah Draf Dokumen</div>
                     </div>
 
                     <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                </a>
-
-                <a class="card" href="{{route("admin/dataguru")}}">
-                    <div>
-                        <div class="numbers">{{$Guru}}</div>
-                        <div class="cardName">Guru</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
-                    </div>
-                </a>
-
-                <a class="card" href="{{route("admin/datamurid")}}">
-                    <div>
-                        <div class="numbers">{{$Murid}}</div>
-                        <div class="cardName">Murid</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
+                        <ion-icon name="document-outline"></ion-icon>
                     </div>
                 </a>
             </div>
@@ -70,66 +70,10 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Semua Pengguna</h2>                   
+                        <h2>Pengumuman</h2>                   
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nama</td>
-                                <td>Role</td>
-                                <td>NIM</td>
-                                <td>Gender</td>
-                                <td>Tanggal Daftar</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            @foreach($Superadminall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Adminall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Guruall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Muridall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+        
                 </div>
 
     <!-- =========== Scripts =========  -->

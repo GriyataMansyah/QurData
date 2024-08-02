@@ -1,39 +1,287 @@
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menangani klik tombol hapus
+            document.querySelectorAll('.delete-icon').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Mencegah aksi default tombol
+    
+                    const id = this.getAttribute('data-id');
+                    const deleteForm = document.getElementById('deleteForm');
+                    const deleteIdInput = document.getElementById('deleteId');
+    
+                    // Tampilkan konfirmasi SweetAlert
+                    Swal.fire({
+                        title: 'Konfirmasi Penghapusan',
+                        text: "Anda yakin ingin menghapus data ini?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Setel ID ke input tersembunyi dalam form penghapusan
+                            deleteIdInput.value = id;
+    
+                            // Setel action URL untuk form penghapusan
+                            deleteForm.action = `/hapus-capaian/${id}`;
+                            
+                            // Submit form penghapusan
+                            deleteForm.submit();
+                        }
+                    });
+                });
+            });
+        });
+
+
+
+// ALERT 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert2').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert3').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert4').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert5').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert6').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert7').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert8').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert9').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert10').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert11').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert`12').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert13').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('alert14').addEventListener('click', function(event) {
+        event.preventDefault(); // Mencegah aksi default dari link
+
+        // Menampilkan SweetAlert2
+        Swal.fire({
+            title: 'Harap Menunggu',
+            text: 'Fitur Ini Menunggu Pengembangan Selanjutnya',
+            timer: 2500, // Durasi dalam milidetik (2.5 detik)
+            timerProgressBar: true, // Menampilkan bar progres
+            showConfirmButton: false // Tidak menampilkan tombol konfirmasi
+        });
+    });
+});
+// <!-- =========== MENYEMBUNYIKAN DATA DARI DATA MASTER  ================== -->
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.card2');
+  const backButtons = document.querySelectorAll('.back-btn');
+  
+  cards.forEach(card => {
+      card.addEventListener('click', () => {
+          const targetId = card.id;
+          
+          // Menyembunyikan semua header
+          document.querySelectorAll('.details').forEach(detail => {
+              detail.classList.add('hidden');
+          });
+
+          // Menampilkan header sesuai dengan card yang diklik
+          if (targetId) {
+              const targetDetail = document.querySelector(`#${targetId}-header`);
+              if (targetDetail) {
+                  targetDetail.classList.remove('hidden');
+                  targetDetail.scrollIntoView({ behavior: 'smooth' });
+              }
+          }
+      });
+  });
+
+  backButtons.forEach(button => {
+      button.addEventListener('click', () => {
+          // Menampilkan menu utama
+          document.querySelectorAll('.details').forEach(detail => {
+              detail.classList.add('hidden');
+          });
+          document.querySelector('.details').classList.remove('hidden');
+      });
+  });
+});
+
+// <!-- =========== NOMOR RANDOM UNTUK NOMOR PENGAJUAN  ================== -->
+function generateRandomNumber() {
+  return Math.floor(100000000000 + Math.random() * 900000000000);
+}
+
+// Menetapkan nomor acak ke input saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+  var nomorInput = document.getElementById('nomor-input');
+  nomorInput.value = generateRandomNumber();
+});
+
 // <!-- =========== MENAMPILKAN HALAMAN SETELAH SELESAI DILOAD  ================== -->
 window.onload = function() {
   document.body.style.display = 'block';
-}
-
-// <!-- ========================= NAVIGASI SIDEBAR AKTIF ==================== -->
-let list = document.querySelectorAll(".navigation li");
-
-function activeLink() {
-  list.forEach((item) => {
-    item.classList.remove("hovered");
-  });
-  this.classList.add("hovered");
-}
-
-list.forEach((item) => item.addEventListener("mouseover", activeLink));
-
-// Menu Toggle
-let toggle = document.querySelector(".toggle");
-let navigation = document.querySelector(".navigation");
-let main = document.querySelector(".main");
-
-toggle.onclick = function () {
-  navigation.classList.toggle("active");
-  main.classList.toggle("active");
-};
-
-// <!-- ========================= MENAMPILKAN PREVIEW PROFILE ==================== -->
-function previewImage(event) {
-  var reader = new FileReader();
-  reader.onload = function(){
-      var output = document.getElementById('preview');
-      output.src = reader.result;
-      output.style.display = 'block';
-  }
-  reader.readAsDataURL(event.target.files[0]);
 }
 
 // <!-- ====================== KELUAR DARI APLIKASI / LOG OUT ==================== -->
@@ -60,6 +308,162 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+
+// <!-- ====================== BERTANYA SEBELUM KIRIM==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  var link = document.getElementById('tanyak');
+  var hiddenButton = document.getElementById('tanyak2');
+  
+  link.addEventListener('click', function(event) {
+      event.preventDefault(); // Mencegah aksi default dari <a>
+      
+      Swal.fire({
+          title: "Apakah Anda Yakin?",
+          text: "Tindakan Ini Akan Menyimpan Informasi Dokumen BC 3.0!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "green",
+          cancelButtonColor: "#333",
+          confirmButtonText: "Simpan!",
+          cancelButtonText: "Batal"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              Swal.fire({
+                  title: "Berhasil!",
+                  text: "Informasi Telah Disimpan",
+                  icon: "success"
+              }).then(() => {
+                  hiddenButton.click(); // Trigger klik pada tombol tersembunyi
+              });
+          }
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock2').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock3').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock4').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock5').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+// <!-- ====================== FITUR BELUM TERSEDIA ==================== -->
+document.addEventListener('DOMContentLoaded', function() {
+  // Menangani klik tombol lock
+  document.getElementById('lock6').addEventListener('click', function() {
+      Swal.fire({
+          title: "Fitur Belum Tersedia",
+          text: "Fitur ini masih dalam pengembangan dan belum tersedia saat ini.",
+          icon: "info",
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "OK"
+      });
+  });
+});
+
+
+// <!-- ========================= NAVIGASI SIDEBAR AKTIF ==================== -->
+let list = document.querySelectorAll(".navigation li");
+
+function activeLink() {
+  list.forEach((item) => {
+    item.classList.remove("hovered");
+  });
+  this.classList.add("hovered");
+}
+
+list.forEach((item) => item.addEventListener("mouseover", activeLink));
+
+// Menu Toggle
+let toggle = document.querySelector(".toggles");
+let navigation = document.querySelector(".navigation");
+let main = document.querySelector(".main");
+
+toggle.onclick = function () {
+  navigation.classList.toggle("active");
+  main.classList.toggle("active");
+};
+
+
+
+
+
+// <!-- ========================= MENAMPILKAN PREVIEW PROFILE ==================== -->
+function previewImage(event) {
+  var reader = new FileReader();
+  reader.onload = function(){
+      var output = document.getElementById('preview');
+      output.src = reader.result;
+      output.style.display = 'block';
+  }
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+
 
 // <!-- ===================== TAMPILKAN ANDA ADALAH SUPER ADMIN ==================== -->
 document.addEventListener('DOMContentLoaded', function() {
@@ -142,7 +546,7 @@ function allowNumbersOnly(event) {
 }
 
 // <!-- ====================== HAPUS DATA MURID ================================= -->
-const deleteIcons = document.querySelectorAll('.delete-icon');
+const deleteIcons = document.querySelectorAll('.delete-icons');
 
 deleteIcons.forEach(icon => {
     icon.addEventListener('click', function() {
@@ -285,36 +689,24 @@ function validateFormAdmin() {
 
 
 // <!-- ======================== TAMBAH INPUTAN CAPAIAN =========================== -->
-document.addEventListener('DOMContentLoaded', function() {
-  const addDataButton = document.getElementById('addDataButton');
-  const inputContainer = document.getElementById('inputContainer');
-  let inputCount = 0;
+   document.addEventListener('DOMContentLoaded', function() {
+        const addButton = document.getElementById('addDataButton');
+        const inputContainer = document.getElementById('inputContainer');
 
-  // Function to add event listener for delete button
-  function addDeleteEvent(deleteButton) {
-      deleteButton.addEventListener('click', function() {
-          inputContainer.removeChild(deleteButton.parentElement);
-      });
-  }
+        addButton.addEventListener('click', function() {
+            const newInput = document.createElement('div');
+            newInput.classList.add('input-group');
+            newInput.innerHTML = `
+                <input type="text" class="form-control custom-input" name="new_data[]" placeholder="Masukkan data baru">
+                <button type="button" class="btn btn-danger delete-icon" onclick="removeElement(this)"><ion-icon name="trash-outline"></ion-icon></button>
+            `;
+            inputContainer.appendChild(newInput);
+        });
 
-  addDataButton.addEventListener('click', function() {
-      inputCount++;
-      const newInputGroup = document.createElement('div');
-      newInputGroup.classList.add('form-group', 'custom-form-group', 'd-flex', 'align-items-center', 'margin-one');
-
-      newInputGroup.innerHTML = `
-          <label for="capaian${inputCount}" class="custom-label"></label>
-          <input type="text" class="form-control custom-input" id="capaian${inputCount}" placeholder="Masukkan Nama Capaian" name="capaian[]" required>
-          <button type="button" class="btn btn-danger delete-icon" data-id="${inputCount}"><ion-icon name="trash-outline"></ion-icon></button>
-      `;
-
-      inputContainer.appendChild(newInputGroup);
-
-      // Add event listener to the new delete button
-      const newDeleteIcon = newInputGroup.querySelector('.delete-icon');
-      addDeleteEvent(newDeleteIcon);
-  });
-});
+        window.removeElement = function(button) {
+            button.parentElement.remove();
+        };
+    });
 
 // <!-- ========================== MENAMPILKAN SESUAI ID ========================= -->
 document.getElementById('closeButton').addEventListener('click', function() {
@@ -364,50 +756,50 @@ function confirmThis() {
   });
 }
 
-// <!-- ============ KONFIRMASI PENGHAPUSAN DATA CAPAIAN ============================ -->
-function confirmThisForm() {
-  Swal.fire({
-      title: 'Anda yakin?',
-      text: "Anda akan menghapus data Capaian. Proses ini tidak dapat dibatalkan!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Ya, hapus semua!',
-      cancelButtonText: 'Batal'
-  }).then((result) => {
-      if (result.isConfirmed) {
-          document.getElementById('TekanIni').click();
-      }
-  });
-}
+// // <!-- ============ KONFIRMASI PENGHAPUSAN DATA CAPAIAN ============================ -->
+// function confirmThisForm() {
+//   Swal.fire({
+//       title: 'Anda yakin?',
+//       text: "Anda akan menghapus data Capaian. Proses ini tidak dapat dibatalkan!",
+//       icon: 'warning',
+//       showCancelButton: true,
+//       confirmButtonColor: '#d33',
+//       cancelButtonColor: '#3085d6',
+//       confirmButtonText: 'Ya, hapus semua!',
+//       cancelButtonText: 'Batal'
+//   }).then((result) => {
+//       if (result.isConfirmed) {
+//           document.getElementById('TekanIni').click();
+//       }
+//   });
+// }
 
 
-// <!-- ======================= GANTI WATNA PADA ABSENSI ============================ -->
-function updateSelectColor(selectElement) {
-  if (selectElement.value == "Hadir") {
-      selectElement.className = "status-hadir";
-  } else if (selectElement.value == "Tidak Hadir") {
-      selectElement.className = "status-ga-hadir";
-  } else if (selectElement.value == "izin") {
-      selectElement.className = "status-izin";
-  } else {
-      selectElement.className = "";
-  }
-}
+// // <!-- ======================= GANTI WATNA PADA ABSENSI ============================ -->
+// function updateSelectColor(selectElement) {
+//   if (selectElement.value == "Hadir") {
+//       selectElement.className = "status-hadir";
+//   } else if (selectElement.value == "Tidak Hadir") {
+//       selectElement.className = "status-ga-hadir";
+//   } else if (selectElement.value == "izin") {
+//       selectElement.className = "status-izin";
+//   } else {
+//       selectElement.className = "";
+//   }
+// }
 
-// <!-- ================ MEMBUKA INPUTAN EDIT DATA CAPAIAN ========================== -->
-function tambahInput(id) {
-  const editButton = document.getElementById(`visible-${id}`);
-  const changeDiv = document.getElementById(`change-${id}`);
+// // <!-- ================ MEMBUKA INPUTAN EDIT DATA CAPAIAN ========================== -->
+// function tambahInput(id) {
+//   const editButton = document.getElementById(`visible-${id}`);
+//   const changeDiv = document.getElementById(`change-${id}`);
 
-  // Hide the edit button
-  editButton.style.display = 'none';
+//   // Hide the edit button
+//   editButton.style.display = 'none';
 
-  // Show the form div
-  changeDiv.style.display = 'flex';
-}
+//   // Show the form div
+//   changeDiv.style.display = 'flex';
+// }
 
-// |-----------------------------------------------------------------------------------------|
-// |-----UNTUK MENAMPILKAN HALAMAN OUTPUT DOKUMEN TERLETAK PADA VIEW GURU/CATATANCAPAIAN-----|
-// |-----------------------------------------------------------------------------------------|
+// // |-----------------------------------------------------------------------------------------|
+// // |-----UNTUK MENAMPILKAN HALAMAN OUTPUT DOKUMEN TERLETAK PADA VIEW GURU/CATATANCAPAIAN-----|
+// // |-----------------------------------------------------------------------------------------|

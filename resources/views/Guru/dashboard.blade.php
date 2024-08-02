@@ -23,45 +23,45 @@
             <div class="cardBox">
                 <a class="card">
                     <div>
-                        <div class="numbers">{{ $Superadmin }}</div>
-                        <div class="cardName">Super Admin</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Berkas Di Terima</div>
                     </div>
 
                     <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
+                        <ion-icon name="checkmark-outline"></ion-icon>
                     </div>
                 </a>
 
                 <a class="card">
                     <div>
-                        <div class="numbers">{{ $Admin }}</div>
-                        <div class="cardName">Admin</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Berkas Di Tahan</div>
                     </div>
 
                     <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
+                        <ion-icon name="pause-outline"></ion-icon>
                     </div>
                 </a>
 
                 <a class="card" id="notice-three">
                     <div>
-                        <div class="numbers">{{ $Guru }}</div>
-                        <div class="cardName">Guru</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Berkas Di Proses</div>
                     </div>
 
                     <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
+                        <ion-icon name="alarm-outline"></ion-icon>
                     </div>
                 </a>
 
-                <a class="card" href="{{route("guru/datamurid")}}">
+                <a class="card">
                     <div>
-                        <div class="numbers">{{ $Murid }}</div>
-                        <div class="cardName">Murid</div>
+                        <div class="numbers">...</div>
+                        <div class="cardName">Berkas Di Buat</div>
                     </div>
 
                     <div class="iconBx">
-                        <ion-icon name="people-outline"></ion-icon>
+                        <ion-icon name="document-outline"></ion-icon>
                     </div>
                 </a>
             </div>
@@ -70,66 +70,10 @@
             <div class="details">
                 <div class="recentOrders">
                     <div class="cardHeader">
-                        <h2>Semua Pengguna</h2>                   
+                        <h2>Pengumuman</h2>                   
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nama</td>
-                                <td>NIK</td>
-                                <td>Nomor HP</td>
-                                <td>Tanggal Lahir</td>
-                                <td>Gender</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            @foreach($Superadminall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Adminall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Guruall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-
-                            @foreach($Muridall as $a)
-                            <tr>
-                                <td>{{$a->nama}}</td>
-                                <td>{{$a->nik}}</td>
-                                <td>{{$a->no_hp}}</td>
-                                <td>{{$a->tanggal_lahir}}</td>
-                                <td>{{$a->jenis_kelamin}}</td>
-                                <td><span class="status delivered">AKTIF</span></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+        
                 </div>
 
     <!-- =========== Scripts =========  -->
