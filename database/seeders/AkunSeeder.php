@@ -29,14 +29,14 @@ class AkunSeeder extends Seeder
         ]);
 
         $admin = Akun::create([
-            'username' => 'admin',
-            'password' => Hash::make('admin'),
+            'username' => 'petugas',
+            'password' => Hash::make('petugas'),
             'role' => 'admin',
         ]);
 
         $guru = Akun::create([
-            'username' => 'guru',
-            'password' => Hash::make('guru'),
+            'username' => 'ekspor',
+            'password' => Hash::make('ekspor'),
             'role' => 'guru',
         ]);
 

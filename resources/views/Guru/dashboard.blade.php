@@ -10,7 +10,7 @@
     <link href="{{ asset('Css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('Images/logo.png')}}" rel="icon">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Dashboard Guru</title>
+    <title>Dashboard Pengekspor</title>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
             <div class="cardBox">
                 <a class="card">
                     <div>
-                        <div class="numbers">...</div>
+                        <div class="numbers">0</div>
                         <div class="cardName">Berkas Di Terima</div>
                     </div>
 
@@ -34,7 +34,7 @@
 
                 <a class="card">
                     <div>
-                        <div class="numbers">...</div>
+                        <div class="numbers">0</div>
                         <div class="cardName">Berkas Di Tahan</div>
                     </div>
 
@@ -43,9 +43,9 @@
                     </div>
                 </a>
 
-                <a class="card" id="notice-three">
+                <a class="card">
                     <div>
-                        <div class="numbers">...</div>
+                        <div class="numbers">0</div>
                         <div class="cardName">Berkas Di Proses</div>
                     </div>
 
@@ -56,7 +56,7 @@
 
                 <a class="card">
                     <div>
-                        <div class="numbers">...</div>
+                        <div class="numbers">{{$A}}</div>
                         <div class="cardName">Berkas Di Buat</div>
                     </div>
 

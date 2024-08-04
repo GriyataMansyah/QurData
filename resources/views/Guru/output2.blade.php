@@ -96,7 +96,7 @@
                 <p>1. Kantor Pabean Pemuatan    : {{ $A->kantor_pabean_muat_asal }}</p>
                 <p>2. Kantor Pabean Ekspor  : {{ $A->kantor_pabean_muat_ekspor }} </p>
                 <h5>B.  Jenis Ekspor    : {{ $A->jenis_ekspor }} </h5>
-                <h5>C.  Kategori Ekspor   : {{ $A->kategori_ekspor }} </h5>
+                <h5>C.  Kategori Ekspor   : {{ $A->kategori }} </h5>
                 <h5>D.  Cara Perdagangan    :{{ $A->cara_dagang }} </h5>
                 
             </td>

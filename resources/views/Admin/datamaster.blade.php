@@ -70,7 +70,7 @@
             </div>
             <div class="card" id="alert3">
                 <div>
-                    <div class="numbers">...</div>
+                    <div class="numbers">7</div>
                     <div class="cardName">Data Kemasan</div>
                 </div>
 
@@ -80,7 +80,7 @@
             </div>
             <div class="card" id="alert4">
                 <div>
-                    <div class="numbers">...</div>
+                    <div class="numbers">7</div>
                     <div class="cardName">Data Peti Kemas</div>
                 </div>
 
@@ -90,7 +90,7 @@
             </div>
             <div class="card" id="alert5">
                 <div>
-                    <div class="numbers">...</div>
+                    <div class="numbers">8</div>
                     <div class="cardName">Transaksi</div>
                 </div>
 
@@ -100,7 +100,7 @@
             </div>
             <a class="card" id="alert6">
                 <div>
-                    <div class="numbers">...</div>
+                    <div class="numbers">13</div>
                     <div class="cardName">Barang</div>
                 </div>
 

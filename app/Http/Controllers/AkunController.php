@@ -21,33 +21,27 @@ class AkunController extends Controller
     public function auth(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'required',
+            'password' => 'required',
         ]);
-
+    
         // Otentikasi pengguna
         if (Auth::attempt($credentials)) {
             $role = Auth::user()->role;
-
+    
             switch ($role) {
                 case 'superadmin':
                     return redirect()->intended('dashboard/superadmin');
-                    break;
                 case 'admin':
                     return redirect()->intended('dashboard/admin');
-                    break;
                 case 'guru':
                     return redirect()->intended('dashboard/Guru');
-                    break;
                 default:
                     return redirect()->intended('/');
-                    break;
             }
         }
-
-        return back()->withErrors([
-            'username' => 'Username atau password salah',
-        ]);
+    
+        // Redirect kembali ke halaman login dengan pesan error
+    return redirect()->route('login')->with('gagal', 'Username atau password salah');
     }
-
 }

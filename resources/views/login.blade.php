@@ -10,18 +10,6 @@
     <title>Login MeTrade</title>
 </head>
 <body class="body-one">
-  @if(Session::has('success'))
-  <script>
-      Swal.fire({
-          icon: 'success',
-          title: 'Berhasil Mendaftar!',
-          text: '{{ Session::get("success") }}',
-          showConfirmButton: true, 
-          timer: 2000 
-          z-index:50;
-      });  
-  </script>
-  @endif
     {{-- <section class="d-flex justify-content-center align-items-center full-height">
         <div class="text-center div-middle row">
             <div class="span_one col-12">
@@ -154,7 +142,7 @@
                   <path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z"/>
                 </svg></span>
                 <div class="form-floating">
-                  <input type="text" class="form-control input1" id="floatingInputGroup2" placeholder="Nomor Identitas (NPWP)" name="npwp" onkeypress="return hanyaAngka(event)" required>
+                  <input type="text" class="form-control input1" id="floatingInputGroup2" placeholder="Nomor Identitas (NPWP)" name="npwp" onkeypress="return hanyaAngka2(event)" required>
                   <label for="floatingInputGroup2">Nomor Identitas (NPWP)</label>
                 </div>
               </div>
@@ -248,6 +236,31 @@
 
 
        <!-- =========== Scripts =========  -->
+       <script>
+        @if(Session::has('success') || Session::has('gagal'))
+            document.addEventListener('DOMContentLoaded', function () {
+                @if(Session::has('success'))
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil Mendaftar!',
+                        text: '{{ Session::get("success") }}',
+                        showConfirmButton: true,
+                        timer: 2000,
+                        zIndex: 50
+                    });
+                @elseif(Session::has('gagal'))
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal!',
+                        text: '{{ Session::get("gagal") }}',
+                        showConfirmButton: true,
+                        timer: 2500,
+                        zIndex: 50
+                    });
+                @endif
+            });
+        @endif
+    </script>
    <script src="{{ asset('Js/main.js')}}"></script>
    <script>
     

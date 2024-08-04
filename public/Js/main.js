@@ -1,3 +1,36 @@
+function hanyaAngka2(event) {
+    var input = event.target;
+    var value = input.value;
+    var charCode = (event.which) ? event.which : event.keyCode;
+
+    // Mengizinkan tombol backspace dan delete (kode ASCII 8 dan 46)
+    if (charCode === 8 || charCode === 46) {
+        return true;
+    }
+
+    // Memeriksa jika karakter yang ditekan adalah angka
+    if (charCode < 48 || charCode > 57) {
+        event.preventDefault();
+        return false;
+    }
+
+    // Memeriksa panjang input setelah karakter baru ditambahkan
+    if (value.length >= 16) {
+        event.preventDefault();
+        return false;
+    }
+
+    return true;
+}
+
+function hanyaAngka(event) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        // Jika karakter bukan angka, cegah penekanan tombol
+        event.preventDefault();
+    }
+    return true;
+}
 
         document.addEventListener('DOMContentLoaded', function() {
             // Menangani klik tombol hapus
@@ -697,8 +730,8 @@ function validateFormAdmin() {
             const newInput = document.createElement('div');
             newInput.classList.add('input-group');
             newInput.innerHTML = `
-                <input type="text" class="form-control custom-input" name="new_data[]" placeholder="Masukkan data baru">
-                <button type="button" class="btn btn-danger delete-icon" onclick="removeElement(this)"><ion-icon name="trash-outline"></ion-icon></button>
+                <input type="text" class="form-control custom-input asmr" name="new_data[]" placeholder="Masukkan data baru" required>
+                <button type="button" class="btn btn-danger delete-icon asmr" onclick="removeElement(this)"><ion-icon name="trash-outline"></ion-icon></button>
             `;
             inputContainer.appendChild(newInput);
         });

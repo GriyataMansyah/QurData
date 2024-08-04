@@ -6,7 +6,7 @@
                     <span class="icon">
                         <ion-icon name="briefcase-outline"></ion-icon>
                     </span>
-                    <span class="title">QurData</span>
+                    <span class="title">MeTrade</span>
                 </a>
             </li>
 

@@ -19,19 +19,20 @@ use Illuminate\Support\Facades\Auth;
 
 class GuruController extends Controller
 {
-    public function Addguru(Request $request)
-    {
-        
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-            // 'nik' => 'required|numeric|min:11',
-            // 'nama' => 'required|string|max:255',
-            // 'tanggal_lahir' => 'required|date',
-            // 'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
-            'no_hp' => 'required|numeric',
-        ]);
 
+public function Addguru(Request $request)
+{
+    $request->validate([
+        'username' => 'required',
+        'password' => 'required',
+        // 'no_hp' => 'required|numeric',
+        // 'nik' => 'required|numeric|min:11',
+        // 'nama' => 'required|string|max:255',
+        // 'tanggal_lahir' => 'required|date',
+        // 'jenis_kelamin' => 'required|in:Laki - Laki,Perempuan',
+    ]);
+
+    try {
         $akun = new Akun();
         $akun->username = $request->username;
         $akun->password = bcrypt($request->password);
@@ -39,7 +40,7 @@ class GuruController extends Controller
         $akun->save(); 
 
         $guru = new Guru();
-        $guru->nik = $request->npwp;
+        $guru->nik = $request->npwp; 
         $guru->nama = $request->nama;
         $guru->tanggal_lahir = "2000/10/10";
         $guru->jenis_kelamin = "Laki - Laki";
@@ -47,8 +48,12 @@ class GuruController extends Controller
         $guru->id_akun = $akun->id;
         $guru->save();
 
-        return redirect()->route('login')->with('success', 'Akun berhasil Dibuat!');
+        return redirect()->route('login')->with('success', 'Akun berhasil dibuat!');
+    } catch (\Exception $e) {
+        // Jika terjadi kesalahan, redirect dengan pesan error
+        return redirect()->route('login')->with('error', 'Terjadi kesalahan saat membuat akun. Silakan coba lagi.');
     }
+}
 
     public function addForm(Request $request)
     {
@@ -59,53 +64,60 @@ class GuruController extends Controller
         // Ambil data dari request atau isi dengan nilai default jika kosong
         $data = [
             'nomor' => $request->input('nomor', 'DEFAULT_NOMOR'),
-            'kantor_pabean_muat_asal' => $request->input('kantor_pabean_muat_asal', 'DEFAULT_KANTOR_PABEAN_MUAT_ASAL'),
-            'pelabuhan_muat_ekspor' => $request->input('pelabuhan_muat_ekspor', 'DEFAULT_PELABUHAN_MUAT_EKSPOR'),
-            'kantor_pabean_muat_ekspor' => $request->input('kantor_pabean_muat_ekspor', 'DEFAULT_KANTOR_PABEAN_MUAT_EKSPOR'),
-            'jenis_ekspor' => $request->input('jenis_ekspor', 'DEFAULT_JENIS_EKSPOR'),
-            'kategori' => $request->input('kategori', 'DEFAULT_KATEGORI'),
-            'cara_dagang' => $request->input('cara_dagang', 'DEFAULT_CARA_DAGANG'),
-            'cara_bayar' => $request->input('cara_bayar', 'DEFAULT_CARA_BAYAR'),
-            'komoditi' => $request->input('komoditi', 'DEFAULT_KOMODITI'),
-            'curah' => $request->input('curah', 'DEFAULT_CURAH'),
-            'nama_eksportir' => $request->input('nama_eksportir', 'DEFAULT_NAMA_EKSPORTIR'),
-            'alamat_eksportir' => $request->input('alamat_eksportir', 'DEFAULT_ALAMAT_EKSPORTIR'),
-            'nama_penerima' => $request->input('nama_penerima', 'DEFAULT_NAMA_PENERIMA'),
-            'alamat_penerima' => $request->input('alamat_penerima', 'DEFAULT_ALAMAT_PENERIMA'),
-            'nama_pembeli' => $request->input('nama_pembeli', 'DEFAULT_NAMA_PEMBELI'),
-            'alamat_pembeli' => $request->input('alamat_pembeli', 'DEFAULT_ALAMAT_PEMBELI'),
-            'seri_kemasan' => $request->input('seri_kemasan', 'DEFAULT_SERI_KEMASAN'),
+            'kantor_pabean_muat_asal' => $request->input('kantor_pabean_muat_asal', 'Batu Ampar'),
+            'pelabuhan_muat_ekspor' => $request->input('pelabuhan_muat_ekspor', 'Batu Ampar'),
+            'kantor_pabean_muat_ekspor' => $request->input('kantor_pabean_muat_ekspor', 'City Land - Singapura'),
+            'jenis_ekspor' => $request->input('jenis_ekspor', 'Langsung'),
+            'kategori' => $request->input('kategori', 'Makanan Pokok'),
+            'cara_dagang' => $request->input('cara_dagang', 'CASH'),
+            'cara_bayar' => $request->input('cara_bayar', 'SQL'),
+            'komoditi' => $request->input('komoditi', 'Komoditi'),
+            'curah' => $request->input('curah', 'Non Curah'),
+            'nama_eksportir' => $request->input('nama_eksportir', 'Almahendra Hansem'),
+            'alamat_eksportir' => $request->input('alamat_eksportir', 'Teluk Melawai'),
+            'nama_penerima' => $request->input('nama_penerima', 'Kapten Jeng Brong Chen'),
+            'alamat_penerima' => $request->input('alamat_penerima', 'Singapura'),
+            'nama_pembeli' => $request->input('nama_pembeli', 'Tokyoo Candy'),
+            'alamat_pembeli' => $request->input('alamat_pembeli', 'Singapura'),
+            'seri_kemasan' => $request->input('seri_kemasan', '232'),
             'jumlah_kemasan' => $request->input('jumlah_kemasan', 1),
-            'jenis_kemasan' => $request->input('jenis_kemasan', 'DEFAULT_JENIS_KEMASAN'),
-            'merek_kemasan' => $request->input('merek_kemasan', 'DEFAULT_MEREK_KEMASAN'),
-            'ukuran_peti_kemas' => $request->input('ukuran_peti_kemas', 'DEFAULT_UKURAN_PETI_KEMAS'),
-            'jenis_peti_kemas' => $request->input('jenis_peti_kemas', 'DEFAULT_JENIS_PETI_KEMAS'),
-            'type_peti_kemas' => $request->input('type_peti_kemas', 'DEFAULT_TYPE_PETI_KEMAS'),
-            'valuta' => $request->input('valuta', 'DEFAULT_VALUTA'),
-            'ndpmb' => $request->input('ndpmb', 'DEFAULT_NDPBM'),
-            'cara_penyerahan' => $request->input('cara_penyerahan', 'DEFAULT_CARA_PENYERAHAN'),
-            'nilai_ekspor' => $request->input('nilai_ekspor', 0.00),
+            'jenis_kemasan' => $request->input('jenis_kemasan', 'KKS'),
+            'merek_kemasan' => $request->input('merek_kemasan', 'SNI'),
+            'ukuran_peti_kemas' => $request->input('ukuran_peti_kemas', '40 X 40'),
+            'jenis_peti_kemas' => $request->input('jenis_peti_kemas', 'XL'),
+            'type_peti_kemas' => $request->input('type_peti_kemas', 'SDLC'),
+            'valuta' => $request->input('valuta', 'IDR'),
+            'ndpmb' => $request->input('ndpmb', '30.000.000'),
+            'cara_penyerahan' => $request->input('cara_penyerahan', 'Default'),
+            'nilai_ekspor' => $request->input('nilai_ekspor', '400.000.000'),
             'freight' => $request->input('freight','Air Plane'),
-            'asuransi' => $request->input('asuransi', 0.00),
-            'nilai_maklan' => $request->input('nilai_maklan', 0.00),
-            'nilai_bea_keluar' => $request->input('nilai_bea_keluar', 0.00),
-            'hs' => $request->input('hs', 'DEFAULT_HS'),
-            'lartas' => $request->input('lartas', 'DEFAULT_LARTAS'),
-            'kode' => $request->input('kode', 'DEFAULT_KODE'),
-            'uraian' => $request->input('uraian', 'DEFAULT_URAIAN'),
-            'mark' => $request->input('mark', 'DEFAULT_MARK'),
-            'tipe' => $request->input('tipe', 'DEFAULT_TIPE'),
-            'negara_asal_barang' => $request->input('negara_asal_barang', 'DEFAULT_NEGARA_ASAL_BARANG'),
-            'harga_fob' => $request->input('harga_fob', 0.00),
-            'volume_barang' => $request->input('volume_barang', 0.00),
-            'berat_bersih' => $request->input('berat_bersih', 0.00),
-            'berat_kotor' => $request->input('berat_kotor', 0.00),
-            'harga_satuan_fob' => $request->input('harga_satuan_fob', 0.00),
-            'tempat_penerima' => $request->input('tempat_penerima', 'DEFAULT_TEMPAT_PENERIMA'),
+            'asuransi' => $request->input('asuransi', '200.000.000'),
+            'nilai_maklan' => $request->input('nilai_maklan', '30.000.000'),
+            'nilai_bea_keluar' => $request->input('nilai_bea_keluar', '3.800.000'),
+            'hs' => $request->input('hs', 'CDF'),
+            'lartas' => $request->input('lartas', 'LARTAS'),
+            'kode' => $request->input('kode', 'AKD35'),
+            'uraian' => $request->input('uraian', 'Tidak Ada Uraian'),
+            'mark' => $request->input('mark', 'Tidak Ada Mark'),
+            'tipe' => $request->input('tipe', 'Mudah Pecah !!!'),
+            'negara_asal_barang' => $request->input('negara_asal_barang', 'Indonesia'),
+            'harga_fob' => $request->input('harga_fob', '5.000.000'),
+            'volume_barang' => $request->input('volume_barang', '400.00 KG'),
+            'berat_bersih' => $request->input('berat_bersih', '380.00 KG'),
+            'berat_kotor' => $request->input('berat_kotor', '20.00 KG'),
+            'harga_satuan_fob' => $request->input('harga_satuan_fob', 'IDR 200.000,00'),
+            'tempat_penerima' => $request->input('tempat_penerima', 'Gudang Negara'),
             'tanggal' => $request->input('tanggal', now()->format('Y-m-d')),
-            'nama' => $request->input('nama', 'DEFAULT_NAMA'),
-            'jabatan' => $request->input('jabatan', 'DEFAULT_JABATAN'),
-            'id_guru' => $request->input('id_guru') // id_guru harus ada
+            'nama' => $request->input('nama', 'Antony'),
+            'jabatan' => $request->input('jabatan', 'Manager'),
+            'id_guru' => $request->input('id_guru'),
+            'nama_eksportir' => 'Kim Jhon Sim',
+            'alamat_eksportir' => 'Batam, Indonesia',
+            'nama_penerima' => 'Joko Wijaya',
+            'alamat_penerima' => 'Batam, Indonesia',
+            'nama_pembeli' => 'Joko Wijaya',
+            'alamat_pembeli' => 'Batam, Indonesia',
+            'seri_kemasan' => '123',
         ];
 
         // Buat entri baru di database
@@ -125,7 +137,12 @@ class GuruController extends Controller
         $Guruall = Guru::all();
         $Adminall = Admin::all();
         $Superadminall = Superadmin::all();
-        return view('Guru/dashboard', compact('Murid','Guru','Admin','Superadmin','Muridall','Guruall','Adminall','Superadminall'));
+
+        $IdAkun = Auth::id();
+        $Akun = Akun::where('id', $IdAkun)->first();
+        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        $A = Form::where('id_guru', $Gurume->id)->count();
+        return view('Guru/dashboard', compact('A'));
     }
 
     public function dafdok()
