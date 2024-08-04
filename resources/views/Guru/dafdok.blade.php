@@ -12,33 +12,46 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Daftar Dokumen BC 3.0</title>
     <script>
-         function printKucing() {
-            // Muat konten halaman kucing menggunakan AJAX
-            fetch('{{ route('output2') }}')
-                .then(response => response.text())
-                .then(data => {
-                    // Buat iframe tersembunyi
-                    const iframe = document.createElement('iframe');
-                    iframe.style.position = 'absolute';
-                    iframe.style.width = '0';
-                    iframe.style.height = '0';
-                    iframe.style.border = 'none';
-                    document.body.appendChild(iframe);
-
-                    // Masukkan konten ke dalam iframe
-                    iframe.contentDocument.open();
-                    iframe.contentDocument.write(data);
-                    iframe.contentDocument.close();
-
-                    // Cetak konten dalam iframe
-                    iframe.contentWindow.print();
-
-                    // Hapus iframe setelah pencetakan selesai
-                    iframe.contentWindow.onafterprint = function() {
-                        document.body.removeChild(iframe);
-                    };
-                });
+          function printKucing(element) {
+        // Mengambil ID dari atribut data-id
+        const id = element.getAttribute('data-id');
+        
+        if (!id) {
+            console.error('ID not found');
+            return;
         }
+
+        // Tambahkan ID ke URL
+        const fetchUrl = `{{ route('output2') }}?id=${id}`;
+
+        fetch(fetchUrl)
+            .then(response => response.text())
+            .then(data => {
+                // Buat iframe tersembunyi
+                const iframe = document.createElement('iframe');
+                iframe.style.position = 'absolute';
+                iframe.style.width = '0';
+                iframe.style.height = '0';
+                iframe.style.border = 'none';
+                document.body.appendChild(iframe);
+
+                // Masukkan konten ke dalam iframe
+                iframe.contentDocument.open();
+                iframe.contentDocument.write(data);
+                iframe.contentDocument.close();
+
+                // Cetak konten dalam iframe
+                iframe.contentWindow.print();
+
+                // Hapus iframe setelah pencetakan selesai
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error fetching content:', error);
+            });
+    }
     </script>
 </head>
 
@@ -140,7 +153,7 @@
                          <td>{{ $a->id }}</td>
                          <td>BC 3.0</td> <!-- Menggunakan data dari model -->
                          <td>
-                            <div type='submit' onclick="printKucing()">{{ $a->nomor}}</form></div></td> <!-- Menggunakan data dari model -->
+                            <div type='submit' onclick="printKucing(this)" data-id="{{$a->id}}">{{ $a->nomor}}</form></div></td> <!-- Menggunakan data dari model -->
                          <td>EKSPORTIR</td> <!-- Menggunakan data dari model -->
                          <td>{{ $a->kantor_pabean_muat_asal }}</td> <!-- Menggunakan data dari model -->
                          <td>{{ $a->kantor_pabean_muat_ekspor }}</td> <!-- Menggunakan data dari model -->

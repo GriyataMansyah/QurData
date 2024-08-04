@@ -159,11 +159,9 @@ class GuruController extends Controller
         $IdAkun = Auth::id();
         $Akun = Akun::where('id',$IdAkun)->first();
         $Gurume = Guru::where('id_akun', $IdAkun)->first();
-        $Forms = Form::where('id_guru', $Gurume->id)->get();
-        $A = $Forms->sortByDesc('created_at')->first();
-        $IdAkun = Auth::id();
-        $Akun = Akun::where('id',$IdAkun)->first();
-        $Gurume = Guru::where('id_akun', $IdAkun)->first();
+        $id = $request->query('id');
+        $A = Form::find($id);
+        
 
         return view('Guru/output2',compact('A','Gurume'));
     }
