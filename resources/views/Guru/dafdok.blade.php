@@ -96,23 +96,23 @@
                             </div>
                             <div class="form-group custom-form-group">
                                 <label for="nama" class="custom-label">Jenis Pemberitahuan :</label>
-                                <input type="text" class="form-control custom-input" id="nama" placeholder="Masukkan Nama Murid" name="jenis_pemberitahuan" value="Jenis Pemberitahuan" disabled>
+                                <input type="text" class="form-control custom-input" id="nama" placeholder="Masukkan Nama Murid" name="jenis_pemberitahuan" value="BC 3.0" disabled>
                             </div>
                             <div class="form-group custom-form-group">
                                 <label for="tanggal_Lahir" class="custom-label">Asal Barang :</label>
-                                <input type="date" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="asal_barang" value="Kawasan Pabean" disabled>
+                                <input type="text" class="form-control custom-input" id="tanggal_lahir" placeholder="Masukkan Tanggal Lahir Murid" name="asal_barang" value="INDONESIA" disabled>
                             </div>
                             <div class="form-group custom-form-group">
                                 <label for="gender" class="custom-label">Tujuan Barang :</label>
                                 <select class="form-control custom-select" id="gender" name="tujuan_barang" value="Luar Daerah Pabean" disabled>
-                                    <option selected disabled>Pilih Gender Murid</option>
+                                    <option selected disabled>Luar Negeri</option>
                                     <option value="Laki - Laki">Laki - Laki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
                             </div>
                             <div class="form-group custom-form-group">
                                 <label for="no_hp" class="custom-label">Jenis Dokumen :</label>
-                                <input type="text" class="form-control custom-input" value="BC 3.0" name="jenis_dokumen" disabled>
+                                <input type="text" class="form-control custom-input" value="Ekspor" name="jenis_dokumen" disabled>
                             </div>
                             <input type="hidden" name="id_guru" value="">
                         </div>
